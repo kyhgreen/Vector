@@ -1,0 +1,20 @@
+VECTOR: money skills, one lesson at a time
+
+ON A WINDOWS PC
+1. Double-click Vector.exe. That's it. Nothing to install, no internet needed.
+2. If Windows says "Windows protected your PC", click "More info", then "Run anyway".
+   (The app isn't code-signed, which is normal for student projects.)
+
+ON A MAC OR CHROMEBOOK
+Double-click "Vector (Mac or Chromebook).html". It opens in your web browser.
+
+TIP FOR TEACHERS AND JUDGES
+Turn on Demo mode (Me > Settings > Demo mode) to open every lesson without
+finishing the earlier ones first.
+
+WHAT'S IN THIS FOLDER
+- Vector.exe: the app for Windows
+- Vector (Mac or Chromebook).html: the same app as one web page
+- Vector Source Code.zip: all of the code (open the README inside for how to build it)
+
+Progress saves on the computer you use it on. No accounts, no data leaves the device.
