@@ -136,14 +136,4 @@ For demonstrations, enable **Me > Settings > Demo mode** to access lessons witho
 
 This repository includes the original source and assets, with GitHub configuration and this README prepared for upload. Generated HTML, Windows executables, installed dependencies, build output, and local machine files are excluded. The `.gitignore` keeps these generated files out of later commits. Build the app locally when you need a runnable copy, and attach packaged downloads to a GitHub Release if you want to distribute them.
 
-## Validation
 
-This upload package was checked with Node.js 24.22.1 and npm 11.9.0:
-
-- Dependency installation completed using `npm ci` with the Electron binary download skipped.
-- All 308 tests across 26 test files passed.
-- `npm run build` passed, including TypeScript checking and PWA generation.
-- `npm run build:file` passed and produced a self-contained HTML file.
-- The desktop preparation script copied that build successfully, and `node --check desktop/main.cjs` passed.
-
-The application source, lesson content, assets, and dependency versions are unchanged from the supplied source archive. This preparation updated the README and GitHub configuration. Windows executable packaging and launch were not tested here.
