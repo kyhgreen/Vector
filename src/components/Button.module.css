@@ -1,0 +1,107 @@
+.btn {
+  --b: var(--c-green);
+  --bd: var(--c-green-dark);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  border: 0;
+  border-radius: var(--radius);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.15s ease;
+  white-space: nowrap;
+}
+
+.block {
+  display: flex;
+  width: 100%;
+}
+
+.lg {
+  min-height: 52px;
+  padding: 0 var(--s-6);
+  font-size: 16px;
+}
+.md {
+  min-height: 44px;
+  padding: 0 var(--s-5);
+  font-size: 14px;
+}
+.sm {
+  min-height: 36px;
+  padding: 0 var(--s-4);
+  font-size: 13px;
+  border-radius: 12px;
+}
+
+.solid {
+  background: var(--b);
+  color: var(--text-on-color);
+  box-shadow: 0 var(--edge) 0 var(--bd);
+  margin-bottom: var(--edge);
+}
+.solid:hover:not(:disabled) {
+  filter: brightness(1.05);
+}
+.solid:active:not(:disabled) {
+  transform: translateY(var(--edge));
+  box-shadow: 0 0 0 var(--bd);
+}
+
+.outline {
+  background: var(--surface);
+  color: var(--text-muted);
+  border: 2px solid var(--border);
+  box-shadow: 0 var(--edge) 0 var(--border);
+  margin-bottom: var(--edge);
+}
+.outline:hover:not(:disabled) {
+  background: var(--surface-2);
+}
+.outline:active:not(:disabled) {
+  transform: translateY(var(--edge));
+  box-shadow: 0 0 0 var(--border);
+}
+
+.ghost {
+  background: transparent;
+  color: var(--b);
+}
+.ghost:hover:not(:disabled) {
+  background: var(--surface-2);
+}
+
+.btn:disabled {
+  background: var(--surface-3);
+  color: var(--text-faint);
+  box-shadow: 0 var(--edge) 0 var(--border-strong);
+  filter: none;
+}
+.ghost:disabled {
+  background: transparent;
+  box-shadow: none;
+}
+
+.icon {
+  display: inline-flex;
+}
+
+.iconBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--text-faint);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.iconBtn:hover {
+  background: var(--surface-2);
+  color: var(--text-muted);
+}

@@ -1,0 +1,44 @@
+.wrap {
+  position: fixed;
+  top: calc(12px + var(--safe-top));
+  left: 0;
+  right: 0;
+  z-index: 200;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  padding: 0 var(--s-4);
+}
+.toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  max-width: 440px;
+  width: 100%;
+  padding: var(--s-3) var(--s-4);
+  text-align: left;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-float);
+}
+.toast[data-tone='badge'] {
+  border-color: color-mix(in srgb, var(--c-yellow) 60%, transparent);
+}
+.emoji {
+  font-size: 28px;
+  line-height: 1;
+}
+.text {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+.text strong {
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 700;
+}

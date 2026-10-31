@@ -1,0 +1,75 @@
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.on {
+  color: var(--c-orange);
+}
+.off {
+  color: var(--c-gray);
+}
+.count {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1;
+  margin-top: 4px;
+}
+.label {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.week {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--s-3) 2px;
+  margin-top: var(--s-2);
+  border-top: 2px solid var(--border);
+  border-bottom: 2px solid var(--border);
+}
+.day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.dow {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-faint);
+}
+.dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--surface-3);
+  display: grid;
+  place-items: center;
+  color: #fff;
+}
+.dotOn {
+  background: var(--c-orange);
+}
+.dotIce {
+  background: var(--c-blue);
+}
+.dotToday {
+  outline: 3px solid var(--c-orange-soft);
+  outline-offset: 2px;
+}
+.msg {
+  text-align: center;
+  color: var(--text-muted);
+}
+.meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+.meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}

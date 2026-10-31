@@ -1,0 +1,29 @@
+.avatar {
+  display: block;
+  flex: none;
+  overflow: visible;
+}
+
+/* A pale tinted circle with bold letters. Rivals only, so it stays calmer than the player's avatar. */
+.initials {
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--i-soft);
+  color: var(--i-dark);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  user-select: none;
+}
+
+/* The -dark shades don't change in dark mode, so switch to the bright one for contrast. */
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme='light'])) .initials {
+    color: var(--i);
+  }
+}
+:global(:root[data-theme='dark']) .initials {
+  color: var(--i);
+}

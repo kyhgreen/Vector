@@ -1,0 +1,827 @@
+import type { Doc, Unit } from '../types'
+
+/* ---------- Documents (repeated on each exercise that needs them) ---------- */
+
+// Lesson 1: 48 hrs x $16.25 = $780.00. SS 6.2% = $48.36, Medicare 1.45% = $11.31, federal $20.33. Deductions $80.00. Net $700.00.
+const jordanStub: Doc = {
+  kind: 'paystub',
+  title: "Harbor Lane Grocery: pay stub, Sep 1–14",
+  subtitle: "Employee: Jordan Ellis · Hourly · Paid every two weeks",
+  rows: [
+    { label: "Hours worked", value: "48 hrs" },
+    { label: "Hourly rate", value: "$16.25" },
+    { label: "Gross pay", value: "$780.00", strong: true },
+    { label: "Total deductions", value: "$80.00" },
+    { label: "Federal income tax", value: "$20.33", indent: true },
+    { label: "Social Security (6.2%)", value: "$48.36", indent: true },
+    { label: "Medicare (1.45%)", value: "$11.31", indent: true },
+    { label: "Net pay", value: "$700.00", strong: true },
+  ],
+  note: "Deposited to checking on Sep 19.",
+}
+
+// Lesson 2 draft: 70 + 35 + 90 + 80 + 40 + 150 = 465 assigned, 175 left.
+const aishaDraft: Doc = {
+  kind: 'table',
+  title: "Aisha's budget: September (draft)",
+  subtitle: "Take-home pay from Maple Street Bakery",
+  rows: [
+    { label: "Take-home pay", value: "$640", strong: true },
+    { label: "Gas", value: "$70" },
+    { label: "Phone plan (her share)", value: "$35" },
+    { label: "Lunch and food out", value: "$90" },
+    { label: "Fun with friends", value: "$80" },
+    { label: "Clothes", value: "$40" },
+    { label: "Savings", value: "$150" },
+    { label: "Total planned so far", value: "$465", strong: true },
+  ],
+  note: "Draft: not every dollar is assigned yet.",
+}
+
+// Lesson 2 final: 465 + 40 + 50 + 10 = 565 assigned, 75 left.
+const aishaFinal: Doc = {
+  kind: 'table',
+  title: "Aisha's budget: September",
+  subtitle: "Sinking funds added",
+  rows: [
+    { label: "Take-home pay", value: "$640", strong: true },
+    { label: "Gas", value: "$70" },
+    { label: "Phone plan (her share)", value: "$35" },
+    { label: "Lunch and food out", value: "$90" },
+    { label: "Fun with friends", value: "$80" },
+    { label: "Clothes", value: "$40" },
+    { label: "Prom fund", value: "$40" },
+    { label: "Holiday gifts fund", value: "$50" },
+    { label: "Game subscription fund", value: "$10" },
+    { label: "Savings", value: "$150" },
+    { label: "Left to assign", value: "$75", strong: true },
+  ],
+}
+
+// Lesson 3: subscriptions 15.99 + 10.99 + 9.99 + 2.99 + 6.99 + 7.99 = 54.94.
+// All debits = 54.94 + 38.40 + 9.75 = 103.09. 212.48 + 620.00 - 103.09 = 729.39.
+const octStatement: Doc = {
+  kind: 'statement',
+  title: "Cedar Valley Credit Union: checking, Oct 1–31",
+  subtitle: "Account ending 4417",
+  rows: [
+    { label: "Opening balance, Oct 1", value: "$212.48" },
+    { label: "Oct 1 · Payroll deposit, Oak Hill Cinema", value: "+$310.00" },
+    { label: "Oct 2 · StreamBox monthly plan", value: "-$15.99" },
+    { label: "Oct 4 · QuickFill Gas", value: "-$38.40" },
+    { label: "Oct 5 · TuneLoop Music", value: "-$10.99" },
+    { label: "Oct 9 · PixelPass game pass", value: "-$9.99" },
+    { label: "Oct 12 · CloudKeep storage", value: "-$2.99" },
+    { label: "Oct 15 · Payroll deposit, Oak Hill Cinema", value: "+$310.00" },
+    { label: "Oct 16 · FitTrack Premium", value: "-$6.99" },
+    { label: "Oct 20 · Corner Deli", value: "-$9.75" },
+    { label: "Oct 24 · ReelHouse streaming", value: "-$7.99" },
+    { label: "Closing balance, Oct 31", value: "$729.39", strong: true },
+  ],
+  note: "FitTrack Premium free trial ended Oct 15.",
+}
+
+// Lesson 4: 110 + 90 + 40 + 140 + 120 + 25 + 100 + 335 = 960.
+const priyaAugust: Doc = {
+  kind: 'table',
+  title: "Priya's budget: August",
+  subtitle: "Take-home pay from Ridgeview Pet Supply",
+  rows: [
+    { label: "Take-home pay", value: "$960", strong: true },
+    { label: "Gas", value: "$110" },
+    { label: "Car insurance (her share)", value: "$90" },
+    { label: "Phone plan", value: "$40" },
+    { label: "Food and eating out", value: "$140" },
+    { label: "Fun and shopping", value: "$120" },
+    { label: "Subscriptions", value: "$25" },
+    { label: "Emergency fund", value: "$100" },
+    { label: "College savings", value: "$335" },
+    { label: "Left to assign", value: "$0", strong: true },
+  ],
+}
+
+// Quiz: 24 hrs x $17.50 = $420.00. SS $26.04, Medicare $6.09, federal $7.87. Deductions $40.00. Net $380.00.
+const samStub: Doc = {
+  kind: 'paystub',
+  title: "Pine Street Cafe: pay stub, week of Jul 6",
+  subtitle: "Employee: Sam Okafor · Hourly · Paid weekly",
+  rows: [
+    { label: "Hours worked", value: "24 hrs" },
+    { label: "Hourly rate", value: "$17.50" },
+    { label: "Gross pay", value: "$420.00", strong: true },
+    { label: "Total deductions", value: "$40.00" },
+    { label: "Federal income tax", value: "$7.87", indent: true },
+    { label: "Social Security (6.2%)", value: "$26.04", indent: true },
+    { label: "Medicare (1.45%)", value: "$6.09", indent: true },
+    { label: "Net pay", value: "$380.00", strong: true },
+  ],
+}
+
+const unit: Unit = {
+  id: 't2-u2',
+  tier: 2,
+  order: 2,
+  title: "Budgeting for Real",
+  tagline: "Build a budget from a real paycheck and adjust it when life changes.",
+  color: 'blue',
+  emoji: '🧾',
+
+  guidebook: {
+    intro:
+      "This unit shows how to build a budget from a real paycheck. You will plan with take-home pay, try the 50/30/20 guideline and a zero-based budget, save ahead for costs you can see coming, and review fixed costs and subscriptions. The last lesson follows one student as she adjusts her plan when her pay and expenses change.",
+    keyIdeas: [
+      {
+        title: "Budget your take-home pay",
+        body: "Plan with net pay, the amount deposited after taxes and other deductions. Gross pay is the bigger number, but you never receive all of it.",
+      },
+      {
+        title: "50/30/20 is a starting point",
+        body: "Split take-home pay into 50% needs, 30% wants, and 20% savings and extra debt payments. If your bills are low, save more than 20%. If they are high, trim wants first.",
+      },
+      {
+        title: "Plan every dollar",
+        body: "In a zero-based budget, income minus your plan equals $0. Savings is part of the plan, so reaching zero does not mean spending everything.",
+      },
+      {
+        title: "Save ahead for known costs",
+        body: "For costs you can see coming, like prom, holiday gifts, or car registration, divide the total by the months left and set that amount aside each month. This is a sinking fund.",
+      },
+      {
+        title: "Review fixed costs and subscriptions",
+        body: "Fixed costs stay the same each month, and variable costs change. Check your statement for subscriptions you no longer use, because small charges add up over a year.",
+      },
+      {
+        title: "Adjust when life changes",
+        body: "If pay drops, protect needs and trim wants. If pay is uneven, plan around a low month. If you get a raise, decide where the extra goes before spending rises to match it.",
+      },
+    ],
+    funFacts: [
+      "Zero-based budgeting became popular with companies and governments in the 1970s. Instead of starting from last year's budget, each department had to justify its spending from zero.",
+      "The name sinking fund comes from governments and companies saving money over time to pay off, or sink, their debts.",
+      "Four $12-a-month subscriptions cost $576 a year.",
+      "A month averages about 4.3 weeks, so multiplying weekly pay by 4 slightly underestimates monthly income.",
+      "Many free trials turn into paid plans automatically unless you cancel before the trial ends.",
+    ],
+    words: [
+      { term: "Gross pay", meaning: "Pay before anything is taken out" },
+      { term: "Net pay", meaning: "Take-home pay after deductions" },
+      { term: "Zero-based budget", meaning: "A plan where income minus the plan equals $0" },
+      { term: "Sinking fund", meaning: "Monthly savings for a known future cost" },
+      { term: "Emergency fund", meaning: "Savings for costs you could not predict" },
+      { term: "Fixed cost", meaning: "The same amount every month" },
+      { term: "Variable cost", meaning: "Changes from month to month" },
+      { term: "Subscription creep", meaning: "Small recurring charges adding up over time" },
+      { term: "Irregular income", meaning: "Pay that goes up and down" },
+      { term: "Lifestyle creep", meaning: "Spending rising whenever income rises" },
+    ],
+  },
+
+  lessons: [
+    /* ---------------- Lesson 1 (11 exercises): pay stub to 50/30/20 ---------------- */
+    {
+      id: 't2-u2-l1',
+      title: "50/30/20 With a Real Paycheck",
+      description: "Read a pay stub and split take-home pay.",
+      exercises: [
+        {
+          type: 'teach',
+          id: 't2-u2-l1-e1',
+          emoji: '💵',
+          title: "Start with take-home pay",
+          body: "Jordan is 17 and works part time at a grocery store. His pay stub shows two important numbers.\n\n**Gross pay** is what he earned before anything was taken out. **Net pay** is what was deposited after taxes. A budget should be built on net pay, because that is the money he can actually spend.",
+          doc: jordanStub,
+        },
+        {
+          type: 'mc',
+          id: 't2-u2-l1-e2',
+          prompt: "Jordan wants to plan his spending for this paycheck. Which amount should he use?",
+          doc: jordanStub,
+          choices: [
+            { text: "$700.00, his net pay", correct: true },
+            { text: "$780.00, his gross pay", why: "This is what he earned, but $80.00 was withheld before the deposit. Planning with $780 means budgeting money he never receives." },
+            { text: "$720.33, gross minus Social Security and Medicare", why: "This leaves out the $20.33 of federal income tax. All three deductions come out before the money reaches his account." },
+            { text: "$759.67, gross minus federal income tax", why: "Social Security and Medicare come out of almost every paycheck too. Here they total $59.67." },
+          ],
+          explain: "Net pay is gross pay minus all deductions: $780.00 minus $80.00 is $700.00. That is the amount that lands in his checking account.",
+        },
+        {
+          type: 'number',
+          id: 't2-u2-l1-e3',
+          prompt: "Jordan is paid every two weeks, so most months he gets two paychecks like this one. What monthly take-home pay should he plan around?",
+          doc: jordanStub,
+          answer: 1400,
+          prefix: '$',
+          explain: "Two paychecks of $700.00 make $1,400. Planning on two paychecks fits most months of the year.",
+        },
+        {
+          type: 'teach',
+          id: 't2-u2-l1-e4',
+          emoji: '📊',
+          title: "The 50/30/20 guideline",
+          body: "The **50/30/20 rule** is a simple way to split take-home pay:\n- 50% for needs: costs you must pay, like gas to get to work or a phone bill\n- 30% for wants: eating out, concerts, clothes you don't need yet\n- 20% for savings and extra debt payments\n\nIt gives you a quick target for each part of your budget.",
+          example: "On $1,000 of take-home pay: $500 for needs, $300 for wants, and $200 for savings.",
+        },
+        {
+          type: 'number',
+          id: 't2-u2-l1-e5',
+          prompt: "Jordan plans around $1,400 a month. Using 50/30/20, how much should go to savings?",
+          answer: 280,
+          prefix: '$',
+          explain: "20% of $1,400 is $280. One way to find it: 10% is $140, and 20% is twice that.",
+        },
+        {
+          type: 'sort',
+          id: 't2-u2-l1-e6',
+          prompt: "Jordan drives to work and lives with his family. Sort his costs into needs and wants.",
+          buckets: ["Needs", "Wants"],
+          items: [
+            { text: "Gas for his commute", bucket: 0 },
+            { text: "His share of car insurance", bucket: 0 },
+            { text: "Non-slip shoes for work", bucket: 0 },
+            { text: "His phone plan", bucket: 0 },
+            { text: "Upgrading to a newer phone", bucket: 1 },
+            { text: "Eating out with coworkers", bucket: 1 },
+            { text: "A second streaming service", bucket: 1 },
+            { text: "Concert tickets", bucket: 1 },
+          ],
+          explain: "Needs keep his life and his job running. Wants are fine to have, but they are the first place to cut when money is tight. The phone plan is a need, while upgrading the phone is a want.",
+        },
+        {
+          type: 'mc',
+          id: 't2-u2-l1-e7',
+          prompt: "Jordan's needs (gas, car insurance, and phone) total $320 a month, well below his $700 needs target. What should he do with the difference?",
+          choices: [
+            { text: "Put most of it toward savings, like a car fund", correct: true },
+            { text: "Move it all to wants, since needs came in low", why: "Nothing in the guideline says unused needs money has to be spent. Moving all $380 to wants skips an easy chance to save." },
+            { text: "Leave it in checking without a plan", why: "Money without a plan usually gets spent a little at a time. If he wants a cushion, he can give it its own savings line." },
+          ],
+          explain: "With low needs, Jordan can save far more than 20%. Living at home with small bills is one of the easiest times to build savings.",
+        },
+        {
+          type: 'teach',
+          id: 't2-u2-l1-e8',
+          emoji: '🧭',
+          title: "A guideline, not a law",
+          body: "50/30/20 is a starting point. Real budgets often look different.\n\nA teen living at home might spend only 20% on needs and save much more than 20%. Someone paying rent on their own might need 60% for needs and have to trim wants. Use the percentages as a check, then adjust them to fit your actual bills.",
+        },
+        {
+          type: 'tf',
+          id: 't2-u2-l1-e9',
+          statement: "If your needs take more than 50% of your take-home pay, the 50/30/20 rule is no longer useful.",
+          answer: false,
+          explain: "The split still works as a check. It shows that wants may need to shrink, and it reminds you to save something, even if it is less than 20% for now.",
+        },
+        {
+          type: 'teach',
+          id: 't2-u2-l1-e10',
+          emoji: '📅',
+          funFact: true,
+          title: "Some months have three paydays",
+          body: "If you are paid every two weeks, you usually get 26 paychecks a year, not 24. That means two months each year include a **third payday**.\n\nMany people build their monthly budget on two paychecks. When a third one arrives, all of it can go to savings or a specific goal.",
+        },
+        {
+          type: 'number',
+          id: 't2-u2-l1-e11',
+          prompt: "Jordan budgets on two $700 paychecks a month, but he gets 26 paychecks a year. How much take-home pay does he receive each year beyond his monthly plan?",
+          answer: 1400,
+          prefix: '$',
+          explain: "Two paychecks a month covers 24 a year. The 2 extra paychecks are 2 × $700 = $1,400 he can put toward savings or a goal.",
+        },
+      ],
+    },
+
+    /* ---------------- Lesson 2 (12 exercises): zero-based budget sheet ---------------- */
+    {
+      id: 't2-u2-l2',
+      title: "Zero-Based Budgets and Sinking Funds",
+      description: "Plan every dollar and save ahead for known costs.",
+      exercises: [
+        {
+          type: 'teach',
+          id: 't2-u2-l2-e1',
+          emoji: '🧮',
+          title: "Assign every dollar",
+          body: "In a **zero-based budget**, you plan for every dollar of income until income minus your plan equals **$0**.\n\nThis does not mean spending everything. Savings counts as part of the plan. Zero means you have decided ahead of time what all of your income is for.",
+          example: "Take-home pay: $500. Gas $60, phone $30, food $100, fun $80, savings $230. Total planned: $500. Left to assign: $0.",
+        },
+        {
+          type: 'tf',
+          id: 't2-u2-l2-e2',
+          statement: "In a zero-based budget, your bank balance should reach $0 by the end of each month.",
+          answer: false,
+          explain: "The plan reaches $0, not the account. Money assigned to savings stays in the bank, and it still counts as planned.",
+        },
+        {
+          type: 'number',
+          id: 't2-u2-l2-e3',
+          prompt: "Aisha is 16 and works at a bakery. This is her draft budget for September. How much of her $640 does she still need to assign?",
+          doc: aishaDraft,
+          answer: 175,
+          prefix: '$',
+          explain: "Her categories add up to $70 + $35 + $90 + $80 + $40 + $150 = $465. $640 minus $465 leaves $175 that has no plan yet.",
+        },
+        {
+          type: 'mc',
+          id: 't2-u2-l2-e4',
+          prompt: "What should Aisha do with the $175 to finish a zero-based budget?",
+          doc: aishaDraft,
+          choices: [
+            { text: "Assign all of it, including to savings or upcoming costs", correct: true },
+            { text: "Leave it unassigned in checking as a buffer", why: "A buffer is a reasonable idea, but in a zero-based budget it gets its own line, like an emergency fund. Unassigned money tends to get spent without a decision." },
+            { text: "Spend it this month so the budget reaches $0", why: "Zero refers to unassigned dollars, not to spending. Saving the $175 also brings the budget to zero." },
+          ],
+          explain: "Each dollar goes into a category she chose on purpose. Savings and future costs are both valid categories.",
+        },
+        {
+          type: 'teach',
+          id: 't2-u2-l2-e5',
+          emoji: '🗓️',
+          title: "Sinking funds for known costs",
+          body: "Some big costs are not surprises. You can see them coming: holiday gifts, prom, a yearly subscription, car registration.\n\nA **sinking fund** spreads one of these costs out. Divide the total by the number of months until it is due, and save that amount each month. When the bill arrives, the money is already set aside.",
+          example: "Car registration of $150 is due in 5 months. $150 ÷ 5 = $30 a month.",
+        },
+        {
+          type: 'number',
+          id: 't2-u2-l2-e6',
+          prompt: "Aisha's prom will cost about $320 for the ticket, outfit, and photos, and it is 8 months away. How much should she save each month?",
+          answer: 40,
+          prefix: '$',
+          explain: "$320 ÷ 8 = $40 a month. Starting early keeps each monthly amount small.",
+        },
+        {
+          type: 'fill',
+          id: 't2-u2-l2-e7',
+          sentence: "Holiday gifts will cost about $200 in 4 months, so Aisha saves ___ a month. Her $60 yearly game subscription renews in 6 months, so she saves ___ a month.",
+          answers: ["$50", "$10"],
+          bank: ["$50", "$10", "$40", "$5", "$60"],
+          explain: "$200 ÷ 4 = $50 and $60 ÷ 6 = $10. Divide by the months left until the cost is due, not by 12.",
+        },
+        {
+          type: 'sort',
+          id: 't2-u2-l2-e8',
+          prompt: "Sinking fund or emergency fund? Sort these costs.",
+          buckets: ["Sinking fund", "Emergency fund"],
+          items: [
+            { text: "Holiday gifts", bucket: 0 },
+            { text: "Yearly car registration", bucket: 0 },
+            { text: "Prom ticket and outfit", bucket: 0 },
+            { text: "Yearly game subscription", bucket: 0 },
+            { text: "Surprise flat tire", bucket: 1 },
+            { text: "Cracked phone screen", bucket: 1 },
+            { text: "Sudden vet bill", bucket: 1 },
+            { text: "Laptop stops working", bucket: 1 },
+          ],
+          explain: "Sinking funds are for costs with a known date or season. Emergency funds are for costs you could not have predicted. Keeping them separate means a planned purchase never drains your safety cushion.",
+        },
+        {
+          type: 'teach',
+          id: 't2-u2-l2-e9',
+          emoji: '⚓',
+          funFact: true,
+          title: "Where the name comes from",
+          body: "The term **sinking fund** comes from government and business finance. Governments and companies have long set money aside over time to pay off, or sink, a debt.\n\nAisha's prom fund uses the same idea on a smaller scale.",
+        },
+        {
+          type: 'number',
+          id: 't2-u2-l2-e10',
+          prompt: "Aisha added her three sinking funds. To finish, she moves what is left into savings. What will her savings line be?",
+          doc: aishaFinal,
+          answer: 225,
+          prefix: '$',
+          explain: "Her sinking funds total $40 + $50 + $10 = $100, which leaves $75 of the $175. Adding $75 to her $150 of savings makes $225, and the budget reaches $0.",
+        },
+        {
+          type: 'match',
+          id: 't2-u2-l2-e11',
+          prompt: "Match each term to its meaning.",
+          pairs: [
+            { left: "Zero-based budget", right: "Income minus the plan equals $0" },
+            { left: "Sinking fund", right: "Saving monthly for a known cost" },
+            { left: "Emergency fund", right: "Cash for costs nobody predicted" },
+            { left: "Left to assign", right: "Income not yet given a category" },
+          ],
+          explain: "These tools work together. The zero-based budget is the plan, and the two funds are categories inside it.",
+        },
+        {
+          type: 'scenario',
+          id: 't2-u2-l2-e12',
+          emoji: '🚗',
+          setup: "Your share of the family car insurance is $540, billed every six months. Last time it was due, you had to borrow from your parents. The next bill is six months away.",
+          question: "How do you prepare?",
+          choices: [
+            {
+              text: "Save $90 a month in a sinking fund",
+              best: true,
+              outcome: "$540 ÷ 6 = $90. When the bill comes, the full amount is set aside and you don't need to borrow.",
+            },
+            {
+              text: "Save $45 a month, starting now",
+              outcome: "$45 is $540 divided by 12, but the bill is due in 6 months. You would have $270, half of what you need.",
+            },
+            {
+              text: "Pay it from your emergency fund when it arrives",
+              outcome: "The bill gets paid, but your cushion goes to a cost you knew about. A real surprise afterward would leave you short.",
+            },
+            {
+              text: "Ask your parents to cover it again and repay them later",
+              outcome: "They may agree, but you start the next six months already owing them $540, and the same problem returns with the following bill.",
+            },
+          ],
+        },
+      ],
+    },
+
+    /* ---------------- Lesson 3 (9 exercises): bank statement and subscriptions ---------------- */
+    {
+      id: 't2-u2-l3',
+      title: "Fixed Costs and Subscriptions",
+      description: "Plan for steady and changing costs, and review your subscriptions.",
+      exercises: [
+        {
+          type: 'teach',
+          id: 't2-u2-l3-e1',
+          emoji: '📌',
+          title: "Fixed and variable costs",
+          body: "**Fixed costs** are the same every month, like a phone plan, a bus pass, or a subscription. They are easy to plan for.\n\n**Variable costs** change from month to month, like gas, food, and gifts. They are where most budgets go off track. To plan for them, look at what you actually spent over the last few months.",
+        },
+        {
+          type: 'sort',
+          id: 't2-u2-l3-e2',
+          prompt: "Fixed or variable? Sort these monthly costs.",
+          buckets: ["Fixed", "Variable"],
+          items: [
+            { text: "Phone plan", bucket: 0 },
+            { text: "Monthly bus pass", bucket: 0 },
+            { text: "Music subscription", bucket: 0 },
+            { text: "Car insurance share", bucket: 0 },
+            { text: "Gas", bucket: 1 },
+            { text: "Eating out", bucket: 1 },
+            { text: "Birthday gifts", bucket: 1 },
+            { text: "Snacks and lunches", bucket: 1 },
+          ],
+          explain: "Fixed costs repeat at the same price. Variable costs depend on how much you drive, eat out, or celebrate that month.",
+        },
+        {
+          type: 'mc',
+          id: 't2-u2-l3-e3',
+          prompt: "Your gas cost $60, $95, and $70 over the last three months. What is the most realistic monthly budget for gas?",
+          choices: [
+            { text: "$75, the average of the three months", correct: true },
+            { text: "$60, the lowest month", why: "Planning for your cheapest month means you would go over budget in most months." },
+            { text: "$70, the most recent month", why: "One month can be unusual. An average of several months gives a steadier estimate." },
+            { text: "$225, the total of all three", why: "$225 is three months of gas. Divide by 3 to get a monthly amount." },
+          ],
+          explain: "$60 + $95 + $70 = $225, and $225 ÷ 3 = $75. Some people round up a little to leave a cushion.",
+        },
+        {
+          type: 'tf',
+          id: 't2-u2-l3-e4',
+          statement: "Because fixed costs stay the same each month, there is no way to lower them.",
+          answer: false,
+          explain: "Fixed means the price is steady, not permanent. You can switch to a cheaper phone plan, join a family plan, or cancel a subscription.",
+        },
+        {
+          type: 'teach',
+          id: 't2-u2-l3-e5',
+          emoji: '🔁',
+          title: "Subscription creep",
+          body: "Subscriptions are fixed costs that are easy to forget. Each one is small, so adding another rarely feels like a big decision.\n\n**Subscription creep** is when these charges pile up until they take a real share of your budget. They renew automatically, so you keep paying whether or not you use them. A bank statement is the best place to find them all.",
+          doc: octStatement,
+        },
+        {
+          type: 'number',
+          id: 't2-u2-l3-e6',
+          prompt: "Add up the subscription charges on this statement. To the nearest dollar, how much do they cost per month?",
+          doc: octStatement,
+          answer: 55,
+          tolerance: 0.1,
+          prefix: '$',
+          explain: "Rounding each one up makes this easier: $16 + $11 + $10 + $3 + $7 + $8 = $55. The exact total is $54.94. Gas, lunch, and paychecks are not subscriptions.",
+        },
+        {
+          type: 'fill',
+          id: 't2-u2-l3-e7',
+          sentence: "At about $55 a month, these subscriptions cost about ___ a year.",
+          doc: octStatement,
+          answers: ["$660"],
+          bank: ["$660", "$550", "$600", "$220"],
+          explain: "$55 × 12 months = $660. Looking at the yearly total makes small monthly charges easier to judge.",
+        },
+        {
+          type: 'tf',
+          id: 't2-u2-l3-e8',
+          statement: "Many free trials switch to a paid plan automatically unless you cancel before the trial ends.",
+          doc: octStatement,
+          answer: true,
+          explain: "That is how the FitTrack charge ended up on this statement. When you start a trial, set a reminder for a day or two before it ends so you can decide on purpose.",
+        },
+        {
+          type: 'scenario',
+          id: 't2-u2-l3-e9',
+          emoji: '🔍',
+          doc: octStatement,
+          setup: "This is your October statement. You use ReelHouse, TuneLoop, and PixelPass every week and keep school files in CloudKeep. You haven't opened StreamBox in two months, and you forgot about FitTrack after its trial.",
+          question: "Which plan makes the most sense?",
+          choices: [
+            {
+              text: "Cancel StreamBox and FitTrack, and keep the rest",
+              best: true,
+              outcome: "You keep everything you use and save $22.98 a month, about $276 a year.",
+            },
+            {
+              text: "Cancel CloudKeep, since it is the cheapest",
+              outcome: "You save $2.99 a month and lose storage you use for school, while the two services you don't use keep renewing.",
+            },
+            {
+              text: "Keep all six, since none costs more than $16",
+              outcome: "Each one is small, but together they cost about $660 a year, including about $276 for two services you don't use.",
+            },
+            {
+              text: "Cancel all six and start fresh",
+              outcome: "You save about $55 a month, but you lose services you use every week and will likely pay to sign up again.",
+            },
+          ],
+        },
+      ],
+    },
+
+    /* ---------------- Lesson 4 (14 exercises): connected story, Priya's school year ---------------- */
+    {
+      id: 't2-u2-l4',
+      title: "When Life Happens",
+      description: "Follow Priya as she adjusts her budget through a school year.",
+      exercises: [
+        {
+          type: 'teach',
+          id: 't2-u2-l4-e1',
+          emoji: '📋',
+          title: "Meet Priya's budget",
+          body: "Priya is 17 and works at a pet supply store. Over the summer she built this zero-based budget, planning every dollar of her $960 take-home pay.\n\nIn this lesson, follow Priya through the school year as her pay drops, her car needs a repair, and she gets a raise. Each change means adjusting the plan, not starting over.",
+          doc: priyaAugust,
+        },
+        {
+          type: 'number',
+          id: 't2-u2-l4-e2',
+          prompt: "Priya's needs are gas, car insurance, and her phone plan. What percent of her take-home pay goes to needs?",
+          doc: priyaAugust,
+          answer: 25,
+          suffix: '%',
+          explain: "$110 + $90 + $40 = $240, and $240 ÷ $960 = 0.25, or 25%. That is well under the 50% guideline, which is why she can save so much.",
+        },
+        {
+          type: 'teach',
+          id: 't2-u2-l4-e3',
+          emoji: '📉',
+          title: "When pay drops",
+          body: "In September, school starts and Priya's shifts are cut. Her take-home pay falls from $960 to **$720** a month.\n\nWhen income drops, adjust in this order:\n- Keep paying needs and any bills with penalties for missing them\n- Trim wants next\n- Lower savings for a while if you still need to\n\nThe goal is a plan that matches the new income.",
+        },
+        {
+          type: 'number',
+          id: 't2-u2-l4-e4',
+          prompt: "Starting from her August budget, how much does Priya need to cut so her plan matches $720?",
+          doc: priyaAugust,
+          answer: 240,
+          prefix: '$',
+          explain: "$960 minus $720 is $240. Her plan has to shrink by $240 so it still adds up to her income.",
+        },
+        {
+          type: 'mc',
+          id: 't2-u2-l4-e5',
+          prompt: "Which change covers the $240 gap without cutting any of her needs?",
+          doc: priyaAugust,
+          choices: [
+            { text: "Cut fun by $60, food by $50, and college savings by $130", correct: true },
+            { text: "Cut gas by $60, fun by $60, and college savings by $120", why: "This adds up to $240, but gas gets her to work. Cutting it could cost her shifts and make the pay drop worse." },
+            { text: "Cut fun by $60 and food by $50", why: "That covers only $110 of the $240 gap. She would still be $130 short each month." },
+            { text: "Cut every line by 25%, since $240 is 25% of $960", why: "The math adds up to $240, but her insurance and phone bills are fixed amounts. She can't pay 25% less on them, and less gas could cost her shifts." },
+          ],
+          explain: "Her new plan: gas $110, insurance $90, phone $40, food $90, fun $60, subscriptions $25, emergency fund $100, college savings $205. Total: $720.",
+        },
+        {
+          type: 'tf',
+          id: 't2-u2-l4-e6',
+          statement: "Even after the pay cut, Priya still saves more than 40% of her take-home pay.",
+          answer: true,
+          explain: "Her emergency fund and college savings now total $100 + $205 = $305, and $305 ÷ $720 is about 42%. Lowering savings for a while after a pay cut is a normal adjustment, and she can raise it again when her hours return.",
+        },
+        {
+          type: 'scenario',
+          id: 't2-u2-l4-e7',
+          emoji: '🔧',
+          setup: "In October, a mechanic tells Priya her brakes are worn and need a $300 repair soon. Her emergency fund has $450, and her college savings has $2,100.",
+          question: "How should she pay for the repair?",
+          choices: [
+            {
+              text: "Use her emergency fund",
+              best: true,
+              outcome: "This is what the fund is for. The brakes are fixed right away, and $150 is left in the fund.",
+            },
+            {
+              text: "Wait until her hours pick up again, then save for it",
+              outcome: "Worn brakes are a safety problem, and waiting can make the repair more expensive. Her emergency fund already covers it.",
+            },
+            {
+              text: "Take it out of her college savings",
+              outcome: "It works, but it sets back a long-term goal when she has an emergency fund built for this kind of cost.",
+            },
+          ],
+        },
+        {
+          type: 'number',
+          id: 't2-u2-l4-e8',
+          prompt: "After the repair, Priya's emergency fund has $150. She keeps adding $100 a month. How many months until it is back to $450?",
+          answer: 3,
+          suffix: 'months',
+          explain: "She needs to rebuild $300. At $100 a month, that takes 3 months.",
+        },
+        {
+          type: 'teach',
+          id: 't2-u2-l4-e9',
+          emoji: '📈',
+          title: "Budgeting with uneven pay",
+          body: "In December, extra holiday shifts bring Priya's take-home pay to **$1,050**. In January, she expects to be back to about $720.\n\nWhen income goes up and down, build the monthly plan around a **low month**. In a higher month, the extra goes to savings or a specific goal instead of raising everyday spending.",
+        },
+        {
+          type: 'number',
+          id: 't2-u2-l4-e10',
+          prompt: "Priya's December plan is still built on $720. How much extra does she have to assign from her $1,050?",
+          answer: 330,
+          prefix: '$',
+          explain: "$1,050 minus $720 is $330. Her normal plan is already covered, so all $330 can go to goals, such as refilling her emergency fund faster.",
+        },
+        {
+          type: 'mc',
+          id: 't2-u2-l4-e11',
+          prompt: "Priya's last three months of take-home pay were $720, $720, and $1,050. What should she plan her January budget around?",
+          choices: [
+            { text: "$720, her usual school-year pay", correct: true },
+            { text: "$830, her three-month average", why: "December was a one-time spike from holiday shifts. Planning on $830 would leave her $110 short in a normal school month." },
+            { text: "$1,050, her most recent month", why: "December included extra holiday shifts. Planning on it would leave her $330 short in January." },
+          ],
+          explain: "Planning around a low month means her bills are covered even when hours are slow. Higher months become extra for savings.",
+        },
+        {
+          type: 'teach',
+          id: 't2-u2-l4-e12',
+          emoji: '💼',
+          title: "Raises and lifestyle creep",
+          body: "In January, Priya gets a raise from $15.00 to $16.00 an hour. That adds about **$50 a month** to her take-home pay.\n\nThe risk with a raise is **lifestyle creep**: spending slowly rises to match the new income, and savings stay the same. Deciding where the new money goes as soon as the raise starts helps prevent this.",
+        },
+        {
+          type: 'scenario',
+          id: 't2-u2-l4-e13',
+          emoji: '💵',
+          setup: "Priya's first paycheck with the raise just arrived. The extra $50 a month is not in her budget yet.",
+          question: "What should she do?",
+          choices: [
+            {
+              text: "Assign it now, such as $30 to college savings and $20 to fun",
+              best: true,
+              outcome: "Her savings go up, she gets to enjoy part of the raise, and every dollar is still planned.",
+            },
+            {
+              text: "Leave the budget alone and let the extra build up in checking",
+              outcome: "Without a plan, the extra $50 usually goes to small purchases, and a few months later there is little to show for the raise.",
+            },
+            {
+              text: "Switch to a phone plan that costs $50 more a month",
+              outcome: "The whole raise becomes a new fixed cost. If her hours drop again, that bill stays the same.",
+            },
+          ],
+        },
+        {
+          type: 'fill',
+          id: 't2-u2-l4-e14',
+          sentence: "When spending rises every time income rises, it is called lifestyle ___. Checking your budget ___ helps you notice it early.",
+          answers: ["creep", "once a month"],
+          bank: ["creep", "once a month", "inflation", "once a year"],
+          explain: "Lifestyle creep happens slowly, so a short monthly check-in is the easiest way to catch it. Inflation is different: it means prices rise over time.",
+        },
+      ],
+    },
+  ],
+
+  quiz: {
+    passPercent: 70,
+    exercises: [
+      {
+        type: 'mc',
+        id: 't2-u2-q-e1',
+        prompt: "Sam is planning this week's spending. Which amount should he budget with?",
+        doc: samStub,
+        choices: [
+          { text: "$380.00, his net pay", correct: true },
+          { text: "$420.00, his gross pay", why: "That is what he earned before deductions. $40.00 was withheld before the money reached his account." },
+          { text: "$387.87, gross minus Social Security and Medicare", why: "This misses the $7.87 of federal income tax. Every deduction comes out before the deposit." },
+          { text: "$412.13, gross minus federal income tax", why: "Social Security and Medicare come out of almost every paycheck. Here they total $32.13." },
+        ],
+        explain: "Net pay is gross pay minus all deductions: $420.00 minus $40.00 is $380.00.",
+      },
+      {
+        type: 'number',
+        id: 't2-u2-q-e2',
+        prompt: "You take home $1,500 a month. Using 50/30/20, how much is your wants slice?",
+        answer: 450,
+        prefix: '$',
+        explain: "30% of $1,500 is $450. 10% is $150, and 30% is three times that.",
+      },
+      {
+        type: 'tf',
+        id: 't2-u2-q-e3',
+        statement: "Under 50/30/20, if your needs cost less than 50% of your pay, you should spend the difference on wants.",
+        answer: false,
+        explain: "The guideline doesn't require spending the leftover. Moving it to savings is often the better choice, especially while your bills are low.",
+      },
+      {
+        type: 'fill',
+        id: 't2-u2-q-e4',
+        sentence: "In a zero-based budget, income minus everything you planned, including savings, equals ___.",
+        answers: ["$0"],
+        bank: ["$0", "your savings", "your bank balance", "20%"],
+        explain: "Every dollar is assigned to a category, so nothing is left unplanned. Money assigned to savings still sits in your account.",
+      },
+      {
+        type: 'number',
+        id: 't2-u2-q-e5',
+        prompt: "Your share of car insurance is $420, billed every 6 months. How much should go into a sinking fund each month?",
+        answer: 70,
+        prefix: '$',
+        explain: "$420 ÷ 6 = $70 a month. Saving it monthly means the full bill is ready when it is due.",
+      },
+      {
+        type: 'mc',
+        id: 't2-u2-q-e6',
+        prompt: "Which cost is the best fit for a sinking fund?",
+        choices: [
+          { text: "A $150 car registration due every June", correct: true },
+          { text: "A surprise tooth repair", why: "You could not have planned the date or the amount. That is what an emergency fund covers." },
+          { text: "A cracked phone screen", why: "Accidents are unpredictable, so they belong to the emergency fund." },
+          { text: "Your weekly gas fill-up", why: "Gas is a regular variable cost. It belongs in your monthly spending plan, not a separate fund." },
+        ],
+        explain: "Sinking funds are for costs you know are coming, with a predictable date and a rough amount.",
+      },
+      {
+        type: 'sort',
+        id: 't2-u2-q-e7',
+        prompt: "Fixed or variable? Sort these costs.",
+        buckets: ["Fixed", "Variable"],
+        items: [
+          { text: "Gym membership", bucket: 0 },
+          { text: "Cloud storage plan", bucket: 0 },
+          { text: "Streaming subscription", bucket: 0 },
+          { text: "Coffee runs", bucket: 1 },
+          { text: "Gas", bucket: 1 },
+          { text: "Gifts", bucket: 1 },
+        ],
+        explain: "Memberships and subscriptions charge the same amount each month. Coffee, gas, and gifts change with how you live that month.",
+      },
+      {
+        type: 'number',
+        id: 't2-u2-q-e8',
+        prompt: "Your subscriptions cost $8, $13, and $6 a month. How much do they cost in a year?",
+        answer: 324,
+        prefix: '$',
+        explain: "$8 + $13 + $6 = $27 a month, and $27 × 12 = $324 a year.",
+      },
+      {
+        type: 'scenario',
+        id: 't2-u2-q-e9',
+        emoji: '🏫',
+        setup: "Summer is over. Once school starts, your take-home pay will drop from $1,000 to $700 a month, but your budget is still built on $1,000.",
+        question: "What is the best move?",
+        choices: [
+          {
+            text: "Rebuild the budget around $700, trimming wants first",
+            best: true,
+            outcome: "Your needs stay covered and your plan matches your real income. Wants shrink for now and can grow again when your hours do.",
+          },
+          {
+            text: "Keep the summer budget and cover the gap with a credit card",
+            outcome: "You would add about $300 of debt each month, and interest would make it more expensive to pay off.",
+          },
+          {
+            text: "Drop car insurance for now, since it is a big bill",
+            outcome: "Nearly every state requires car liability insurance, so driving without it can bring fines and leaves you unprotected after an accident.",
+          },
+          {
+            text: "Stop all saving and keep wants the same",
+            outcome: "The math works, but you stop building a cushion, and the next surprise expense would have nothing to come from.",
+          },
+        ],
+      },
+      {
+        type: 'mc',
+        id: 't2-u2-q-e10',
+        prompt: "Your take-home pay over the past four months was $500, $780, $560, and $640. What should your monthly budget be built on?",
+        choices: [
+          { text: "$500, your lowest month", correct: true },
+          { text: "$620, your average month", why: "An average hides the slow months. In a $500 month, a $620 plan would leave you $120 short." },
+          { text: "$780, your best month", why: "Your best month may not repeat. Planning on it would leave you short in every other month." },
+        ],
+        explain: "Building on a low month keeps needs covered when hours are slow. Extra money in better months can go to savings.",
+      },
+    ],
+  },
+}
+
+export default unit

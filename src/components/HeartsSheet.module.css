@@ -1,0 +1,26 @@
+.row {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: var(--s-2);
+}
+.full {
+  color: var(--c-red);
+}
+.empty {
+  color: var(--surface-3);
+}
+.text {
+  text-align: center;
+  color: var(--text-muted);
+  margin-bottom: var(--s-2);
+}
+.hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text-faint);
+  margin-top: -6px;
+}

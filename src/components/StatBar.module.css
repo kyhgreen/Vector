@@ -1,0 +1,43 @@
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+}
+.stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  font-weight: 700;
+  font-size: 17px;
+  transition: background 0.15s;
+}
+.stat:hover {
+  background: var(--surface-2);
+}
+.flameOn {
+  color: var(--c-orange);
+}
+.flameOff {
+  color: var(--c-gray);
+}
+.streakOn {
+  color: var(--c-orange);
+}
+.muted {
+  color: var(--text-faint);
+}
+.coins {
+  color: var(--c-yellow-dark);
+}
+.heart {
+  color: var(--c-red);
+}
+.hearts {
+  color: var(--c-red);
+  display: inline-flex;
+}
