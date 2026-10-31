@@ -4,26 +4,6 @@ Vector is a financial literacy app built for the Congressional App Challenge. It
 
 This repository contains the application source, lesson content, assets, tests, build scripts, and Windows desktop wrapper from the Vector submission.
 
-## Upload to GitHub
-
-1. Extract `Vector-GitHub.zip` on your computer.
-2. Create an empty GitHub repository.
-3. Upload the extracted files and folders into the repository's root. `README.md`, `package.json`, and `src/` should appear directly on the repository's main page.
-4. Include `.github/`, `.gitignore`, `.gitattributes`, and `.nvmrc`. Some file browsers hide names that begin with a dot.
-5. Commit the files to the `main` branch.
-
-Extract the archive before uploading. Uploading the ZIP itself stores an archive instead of making the source files available as a working repository. If the browser rejects a large batch, upload smaller batches or use Git.
-
-To upload with Git, open a terminal in the extracted project folder and run these commands. Replace the example URL with your empty repository's URL.
-
-```bash
-git init
-git add .
-git commit -m "Add Vector source"
-git branch -M main
-git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
-git push -u origin main
-```
 
 ## Features
 
