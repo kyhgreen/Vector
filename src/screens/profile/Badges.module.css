@@ -1,0 +1,181 @@
+/* ---------- Badge tile (shared base) ---------- */
+.tile {
+  --c: var(--c-gray);
+  --cd: var(--c-gray-dark);
+  --cs: var(--c-gray-soft);
+  width: 100%;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+}
+
+/* The round medal with the emoji in it */
+.medal {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--c);
+}
+.locked .medal {
+  background: var(--surface-3);
+}
+.medalEmoji {
+  font-size: 26px;
+  line-height: 1;
+}
+.locked .medalEmoji {
+  filter: grayscale(1);
+  opacity: 0.45;
+}
+
+.name {
+  font-weight: 700;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+.locked .name {
+  color: var(--text-muted);
+}
+
+/* ---------- Compact: medal + name, no box (profile preview) ---------- */
+.compact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 2px var(--s-2);
+  text-align: center;
+  border-radius: var(--radius);
+}
+.compact .medal {
+  width: 58px;
+  height: 58px;
+  box-shadow: 0 var(--edge) 0 var(--cd);
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+.compact.locked .medal {
+  box-shadow: 0 var(--edge) 0 var(--border-strong);
+}
+.compact .medalEmoji {
+  font-size: 28px;
+}
+.compact:active .medal {
+  transform: translateY(var(--edge));
+  box-shadow: 0 0 0 var(--cd);
+}
+.compact .name {
+  font-size: 13px;
+  font-weight: 500;
+}
+.compact.earned .name {
+  font-weight: 700;
+}
+
+/* ---------- Row: the full badges list ---------- */
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-3) var(--s-2);
+  text-align: left;
+  border-radius: var(--radius-sm);
+  transition: background 0.15s ease;
+}
+.row:hover {
+  background: var(--surface-2);
+}
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+.muted {
+  font-size: 14px;
+  line-height: 1.35;
+  color: var(--text-muted);
+}
+.progressRow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  width: 100%;
+  margin-top: 4px;
+}
+.progressNum {
+  flex: none;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Badge sheet ---------- */
+.sheet {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--s-3);
+  text-align: center;
+}
+.bigMedal {
+  --c: var(--c-gray);
+  display: grid;
+  place-items: center;
+  width: 104px;
+  height: 104px;
+  margin: var(--s-2) auto var(--s-1);
+  border-radius: 50%;
+  background: var(--c);
+}
+.bigLocked {
+  background: var(--surface-3);
+}
+.bigEmoji {
+  font-size: 54px;
+  line-height: 1;
+}
+.bigLocked .bigEmoji {
+  filter: grayscale(1);
+  opacity: 0.45;
+}
+.sheetTitle {
+  font-size: 22px;
+}
+.sheetDesc {
+  color: var(--text-muted);
+  margin-top: -6px;
+}
+.sheetLine {
+  line-height: 1.45;
+}
+.reward {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: var(--s-2);
+}
+.sheetProgress {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-top: var(--s-1);
+}
+.sheetProgress > :first-child {
+  flex: 1;
+}
+.sheetProgressNum {
+  flex: none;
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}

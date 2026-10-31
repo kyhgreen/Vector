@@ -1,0 +1,117 @@
+/*
+  Full-screen frame: top bar (back + progress), a scrolling middle, and a
+  footer with the big button that's always in thumb reach.
+*/
+.screen {
+  /* Readable "ink" versions of brand colors for text on pale tints. */
+  --ink-green: var(--c-green-dark);
+  --ink-blue: var(--c-blue-dark);
+
+  height: 100dvh;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  background: var(--bg);
+  overflow: hidden;
+}
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme='light'])) .screen {
+    --ink-green: var(--c-green);
+    --ink-blue: var(--c-blue);
+  }
+}
+:global(:root[data-theme='dark']) .screen {
+  --ink-green: var(--c-green);
+  --ink-blue: var(--c-blue);
+}
+
+/* ---------- Top bar ---------- */
+.top {
+  padding: calc(var(--s-3) + var(--safe-top)) calc(var(--s-4) + var(--safe-right)) 0 calc(var(--s-4) + var(--safe-left));
+}
+.topInner {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  max-width: 600px;
+  min-height: 48px;
+  margin: 0 auto;
+}
+.back {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  margin-left: -8px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-faint);
+  transition: background 0.15s, color 0.15s, transform 0.08s;
+}
+.back:hover {
+  background: var(--surface-2);
+  color: var(--text-muted);
+}
+.back:active {
+  transform: scale(0.9);
+}
+.progress {
+  flex: 1;
+}
+
+/* ---------- Middle ---------- */
+.main {
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: var(--s-5) calc(var(--s-4) + var(--safe-right)) var(--s-6) calc(var(--s-4) + var(--safe-left));
+}
+.step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  padding: var(--s-4) calc(var(--s-4) + var(--safe-right)) calc(var(--s-4) + var(--safe-bottom)) calc(var(--s-4) + var(--safe-left));
+  border-top: 2px solid var(--border);
+  background: var(--bg);
+}
+.footerBare {
+  border-top-color: transparent;
+}
+.footerInner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  max-width: 520px;
+  margin: 0 auto;
+}
+.fine {
+  margin-top: var(--s-2);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-faint);
+  text-align: center;
+}
+
+@media (min-width: 720px) {
+  .column {
+    padding-top: var(--s-8);
+  }
+  .footer {
+    padding-top: var(--s-5);
+    padding-bottom: calc(var(--s-6) + var(--safe-bottom));
+  }
+}

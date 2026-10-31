@@ -1,0 +1,311 @@
+.page {
+  display: flex;
+  flex-direction: column;
+}
+
+.block {
+  margin-top: var(--s-8);
+}
+
+.muted {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* ---------- Who you are ---------- */
+.top {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  padding-top: var(--s-2);
+}
+.avatar {
+  position: relative;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 88px;
+  height: 88px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--cs);
+  border: 3px solid var(--c);
+  box-shadow: 0 var(--edge) 0 var(--cd);
+  cursor: pointer;
+}
+.avatar:active {
+  box-shadow: 0 0 0 var(--cd);
+  translate: 0 var(--edge);
+}
+.avatarArt {
+  width: 100%;
+  height: 100%;
+}
+.avatarPlus {
+  position: absolute;
+  right: -2px;
+  bottom: 0;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--c-blue);
+  color: var(--text-on-color);
+  border: 3px solid var(--bg);
+}
+
+.who {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-width: 0;
+}
+.name {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.nameLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  margin: -10px 0 -8px -8px;
+  padding: 0 var(--s-2);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--c-blue);
+  font-size: 14px;
+}
+.nameLink:hover {
+  text-decoration: underline;
+}
+.joined {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.top .gear {
+  flex: none;
+  align-self: flex-start;
+  width: 44px;
+  height: 44px;
+  margin: -4px -6px 0 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: var(--text-muted);
+}
+.top .gear:hover {
+  color: var(--text);
+  background: var(--surface-2);
+}
+
+/* ---------- Money title ---------- */
+.rank {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  margin-top: var(--s-6);
+}
+.rankTop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-2);
+}
+.rankTitle {
+  font-size: 18px;
+  font-weight: 700;
+  min-width: 0;
+}
+.rankXp {
+  flex: none;
+  font-weight: 700;
+  color: var(--c-yellow-dark);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Stats ---------- */
+.stats {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  margin-top: var(--s-6);
+  padding-bottom: var(--edge);
+}
+.card {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  width: 100%;
+  min-height: 64px;
+  padding: var(--s-3) var(--s-4);
+  text-align: left;
+  color: var(--text);
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 var(--edge) 0 var(--border);
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.15s ease;
+}
+.card:hover {
+  background: var(--surface-2);
+}
+.card:active {
+  transform: translateY(var(--edge));
+  box-shadow: 0 0 0 var(--border);
+}
+.streak {
+  padding: var(--s-4) var(--s-5) var(--s-4) var(--s-4);
+}
+.flame {
+  flex: none;
+  color: var(--c-orange);
+}
+.flameOff {
+  color: var(--c-gray);
+}
+.cardText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+.big {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+}
+.mid {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+.suffix {
+  font-weight: 500;
+  color: var(--text-faint);
+}
+.cardLabel {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.best {
+  flex: none;
+  align-self: flex-end;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.cardIcon {
+  flex: none;
+  color: var(--c);
+}
+.pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: var(--s-3);
+}
+
+/* ---------- Sections ---------- */
+.sectionHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+  margin-bottom: var(--s-3);
+}
+.sectionTitle {
+  font-size: 19px;
+}
+.block > .sectionTitle {
+  margin-bottom: var(--s-2);
+}
+.headCount {
+  margin-left: 4px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-faint);
+}
+.seeAll {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  min-height: 44px;
+  margin-right: -6px;
+  padding: 0 var(--s-1) 0 var(--s-2);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--c-blue);
+  font-size: 15px;
+}
+.seeAll:hover {
+  text-decoration: underline;
+}
+.emptyLine {
+  margin: 0 0 var(--s-3);
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* ---------- Badge shelf ---------- */
+.badgeGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-3) var(--s-2);
+}
+
+/* ---------- Nerdy numbers ---------- */
+.list {
+  margin: 0;
+}
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  min-height: 46px;
+  padding: var(--s-2) 2px;
+}
+.row + .row {
+  border-top: 2px solid var(--border);
+}
+.rowLabel {
+  min-width: 0;
+  color: var(--text-muted);
+}
+.rowValue {
+  flex: none;
+  margin: 0;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (min-width: 640px) {
+  .badgeGrid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+/* Very narrow phones */
+@media (max-width: 370px) {
+  .avatar {
+    width: 76px;
+    height: 76px;
+  }
+  .card {
+    padding: var(--s-3);
+    gap: var(--s-2);
+  }
+  .mid {
+    font-size: 18px;
+  }
+}

@@ -1,0 +1,219 @@
+.splash {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-8);
+  text-align: center;
+  padding: var(--s-8) 0 var(--s-4);
+}
+
+/* ---------- The bill ---------- */
+.art {
+  position: relative;
+  width: min(300px, 82vw);
+  aspect-ratio: 1.5;
+  display: grid;
+  place-items: center;
+}
+
+.billBtn {
+  position: relative;
+  z-index: 1;
+  width: 86%;
+  aspect-ratio: 2.15;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  border-radius: var(--radius);
+}
+.billBtn:focus-visible {
+  outline-offset: 10px;
+}
+
+.billWiggle {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.bill {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-5deg);
+  background: var(--c-green-soft);
+  border: 2px solid var(--c-green);
+  border-radius: 14px 18px 16px 12px;
+  box-shadow: 0 4px 0 var(--c-green-dark);
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+.billBtn:hover .bill {
+  transform: rotate(-3deg);
+}
+.billBtn:active .bill {
+  transform: rotate(-5deg) translateY(4px);
+  box-shadow: 0 0 0 var(--c-green-dark);
+}
+
+.billBorder {
+  position: absolute;
+  inset: 6px;
+  border: 2px dashed var(--c-green);
+  border-radius: 10px;
+  opacity: 0.45;
+}
+
+.seal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 28%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--c-green);
+  color: var(--text-on-color);
+  font-size: clamp(26px, 8vw, 34px);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.corner {
+  position: absolute;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ink-green);
+}
+.tl {
+  top: 13px;
+  left: 16px;
+}
+.tr {
+  top: 13px;
+  right: 16px;
+}
+.bl {
+  bottom: 13px;
+  left: 16px;
+}
+.br {
+  bottom: 13px;
+  right: 16px;
+}
+
+.billText {
+  position: absolute;
+  left: 0;
+  right: 0;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  color: var(--ink-green);
+}
+.billTop {
+  top: 14px;
+}
+.billBottom {
+  bottom: 14px;
+}
+
+.fly {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: 42%;
+  margin-left: -15px;
+  pointer-events: none;
+}
+
+/* ---------- The bill's speech bubble ---------- */
+.quipWrap {
+  position: absolute;
+  z-index: 4;
+  top: -18px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+.quip {
+  position: relative;
+  max-width: min(260px, 80vw);
+  padding: 8px 14px;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--text);
+}
+.quip::after {
+  content: '';
+  position: absolute;
+  left: 46%;
+  bottom: -8px;
+  width: 12px;
+  height: 12px;
+  background: var(--surface);
+  border-right: 2px solid var(--border);
+  border-bottom: 2px solid var(--border);
+  transform: rotate(45deg);
+}
+
+/* ---------- Wordmark & pitch ---------- */
+.copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-2);
+}
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+}
+.wordmark {
+  font-size: clamp(44px, 12vw, 58px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--c-green);
+  padding-bottom: 6px;
+}
+.wordmark:focus {
+  outline: none;
+}
+.pitch {
+  max-width: 18em;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+@media (min-width: 720px) {
+  .art {
+    width: 360px;
+  }
+}
+
+@media (max-height: 620px) {
+  .splash {
+    padding-top: var(--s-4);
+    gap: var(--s-5);
+  }
+  .art {
+    width: min(250px, 72vw);
+  }
+}

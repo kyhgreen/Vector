@@ -1,0 +1,114 @@
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-3);
+  text-align: center;
+}
+
+.lead {
+  text-align: center;
+  line-height: 1.5;
+}
+
+.quip {
+  color: var(--text-muted);
+}
+
+/* ---------- Result ---------- */
+.resultHero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-3);
+  min-height: 100px;
+}
+.fromBadge {
+  opacity: 0.6;
+  filter: saturate(0.6);
+}
+.arrow {
+  display: inline-grid;
+  color: var(--c-green);
+}
+.arrowDown {
+  color: var(--text-faint);
+}
+.toBadge {
+  display: inline-grid;
+}
+
+/* ---------- Player ---------- */
+.player {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+}
+.bigAvatar {
+  flex: none;
+  width: 72px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  overflow: hidden;
+  font-size: 26px;
+}
+.bigAvatarYou {
+  border-color: var(--c-green);
+}
+.playerText {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.youName {
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.playerStats {
+  color: var(--text-muted);
+}
+.bigNum {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.bio {
+  line-height: 1.5;
+}
+.note {
+  color: var(--text-muted);
+}
+
+.gap {
+  padding-top: var(--s-3);
+  border-top: 2px solid var(--border);
+  line-height: 1.5;
+}
+
+/* ---------- Division ---------- */
+.fact {
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+.fact strong {
+  color: var(--text);
+}
+
+/* ---------- Rules ---------- */
+.rules {
+  margin: 0;
+  padding-left: 1.2em;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  line-height: 1.45;
+}
+.rules li::marker {
+  color: var(--c-green);
+}

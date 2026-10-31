@@ -1,0 +1,54 @@
+/* A plain list, not a grid of cards. Rows split by a thin line. */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.list li + li {
+  border-top: 2px solid var(--border);
+}
+.tool {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  min-height: 64px;
+  padding: var(--s-3) var(--s-2) 14px 6px;
+  border: 0;
+  border-radius: var(--radius);
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  transition: background 0.15s;
+}
+.tool:hover {
+  background: var(--surface-2);
+}
+.icon {
+  flex: none;
+  width: 40px;
+  font-size: 30px;
+  line-height: 1;
+  text-align: center;
+}
+.text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.title {
+  font-weight: 700;
+  font-size: 17px;
+}
+.tagline {
+  color: var(--text-muted);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+.chev {
+  color: var(--text-faint);
+  flex: none;
+}

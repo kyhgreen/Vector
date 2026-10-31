@@ -1,0 +1,61 @@
+.page {
+  display: flex;
+  flex-direction: column;
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  margin: var(--s-1) 0 var(--s-6);
+  padding-left: 2px;
+}
+.ringNum {
+  font-size: 15px;
+  font-weight: 700;
+}
+.summaryText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.summaryTitle {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.summaryLine {
+  color: var(--text-muted);
+}
+
+.filter {
+  margin-bottom: var(--s-3);
+}
+.filterLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.count {
+  color: var(--text-faint);
+  font-weight: 500;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.cell {
+  min-width: 0;
+}
+.cell + .cell {
+  border-top: 2px solid var(--border);
+}
+
+.emptyBtn {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--s-4);
+}

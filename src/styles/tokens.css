@@ -1,0 +1,189 @@
+/*
+  Design tokens for Vector. Every color in the app comes from here, so dark
+  mode works automatically. Never hard-code a hex color in a component; use
+  one of these variables instead.
+
+  Each brand color has three flavors:
+    --c-NAME       the main color (buttons, icons, fills)
+    --c-NAME-dark  a deeper shade used for the chunky "3D" bottom edge
+    --c-NAME-soft  a pale tint for backgrounds and highlights
+*/
+
+:root {
+  color-scheme: light;
+
+  --font: 'M PLUS Rounded 1c', ui-rounded, 'SF Pro Rounded', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Surfaces & text */
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f6f7f9;
+  --surface-3: #eceef2;
+  --border: #e3e6eb;
+  --border-strong: #cfd4dc;
+  --text: #3c3c3c;
+  --text-muted: #777b82;
+  --text-faint: #9aa1ad;
+  --overlay: rgba(17, 20, 26, 0.55);
+
+  /* Brand palette */
+  --c-green: #1fb760;
+  --c-green-dark: #158a47;
+  --c-green-soft: #e3f8ec;
+
+  --c-blue: #1e9bf0;
+  --c-blue-dark: #1677c0;
+  --c-blue-soft: #e2f2fe;
+
+  --c-purple: #9b5cf6;
+  --c-purple-dark: #7a3fd6;
+  --c-purple-soft: #f1e9fe;
+
+  --c-orange: #ff9416;
+  --c-orange-dark: #d9740a;
+  --c-orange-soft: #fff1e0;
+
+  --c-red: #ff4f5e;
+  --c-red-dark: #d63645;
+  --c-red-soft: #ffe7e9;
+
+  --c-yellow: #ffc92e;
+  --c-yellow-dark: #e0a400;
+  --c-yellow-soft: #fff7d9;
+
+  --c-pink: #ff5fa8;
+  --c-pink-dark: #d93f88;
+  --c-pink-soft: #ffe8f3;
+
+  --c-teal: #14c2b4;
+  --c-teal-dark: #0e968b;
+  --c-teal-soft: #ddf8f5;
+
+  --c-gray: #aab1bd;
+  --c-gray-dark: #8a92a0;
+  --c-gray-soft: #eef0f3;
+
+  /* Semantic aliases */
+  --c-primary: var(--c-green);
+  --c-primary-dark: var(--c-green-dark);
+  --c-primary-soft: var(--c-green-soft);
+  --c-correct: var(--c-green);
+  --c-correct-soft: var(--c-green-soft);
+  --c-wrong: var(--c-red);
+  --c-wrong-soft: var(--c-red-soft);
+  --c-xp: var(--c-yellow);
+  --c-streak: var(--c-orange);
+  --c-heart: var(--c-red);
+  --c-coin: var(--c-yellow);
+  --text-on-color: #ffffff;
+
+  /* Chart series colors, in fixed order (validated for color-blind readers).
+     Use slot 1 for the first series, 2 for the second, and so on. */
+  --chart-1: #1677c0;
+  --chart-2: #e07b0a;
+  --chart-3: #8a4ae8;
+  --chart-4: #14a050;
+  --chart-grid: #eceef2;
+  --chart-axis: #9aa1ad;
+
+  /* Shape */
+  --radius-sm: 10px;
+  --radius: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+
+  /* Depth: the "chunky" look comes from a solid bottom edge, not blur */
+  --edge: 3px;
+  --shadow-card: 0 2px 0 var(--border);
+  --shadow-float: 0 10px 30px rgba(20, 24, 31, 0.12);
+
+  /* Spacing scale */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-10: 40px;
+
+  /* Layout */
+  --content-max: 640px;
+  --tabbar-h: 68px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+
+  /* Motion */
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Dark theme, written once and applied two ways: follow the device, or forced. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --bg: #131a20;
+    --surface: #18222a;
+    --surface-2: #1f2b34;
+    --surface-3: #283741;
+    --border: #2d3c47;
+    --border-strong: #3c4e5b;
+    --text: #eef2f5;
+    --text-muted: #a3b0bb;
+    --text-faint: #6f7f8b;
+    --overlay: rgba(0, 0, 0, 0.65);
+    --c-green-soft: #163a28;
+    --c-blue-soft: #14324a;
+    --c-purple-soft: #2d2147;
+    --c-orange-soft: #3d2a14;
+    --c-red-soft: #43202a;
+    --c-yellow-soft: #3b3215;
+    --c-pink-soft: #43203a;
+    --c-teal-soft: #113a37;
+    --c-gray: #5b6a76;
+    --c-gray-dark: #47545e;
+    --c-gray-soft: #222f38;
+    --shadow-float: 0 10px 30px rgba(0, 0, 0, 0.45);
+  --chart-1: #2b8fd6;
+  --chart-2: #c96e0c;
+  --chart-3: #9161e8;
+  --chart-4: #1f9a55;
+  --chart-grid: #283741;
+  --chart-axis: #6f7f8b;
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #131a20;
+  --surface: #18222a;
+  --surface-2: #1f2b34;
+  --surface-3: #283741;
+  --border: #2d3c47;
+  --border-strong: #3c4e5b;
+  --text: #eef2f5;
+  --text-muted: #a3b0bb;
+  --text-faint: #6f7f8b;
+  --overlay: rgba(0, 0, 0, 0.65);
+  --c-green-soft: #163a28;
+  --c-blue-soft: #14324a;
+  --c-purple-soft: #2d2147;
+  --c-orange-soft: #3d2a14;
+  --c-red-soft: #43202a;
+  --c-yellow-soft: #3b3215;
+  --c-pink-soft: #43203a;
+  --c-teal-soft: #113a37;
+  --c-gray: #5b6a76;
+  --c-gray-dark: #47545e;
+  --c-gray-soft: #222f38;
+  --shadow-float: 0 10px 30px rgba(0, 0, 0, 0.45);
+  --chart-1: #2b8fd6;
+  --chart-2: #c96e0c;
+  --chart-3: #9161e8;
+  --chart-4: #1f9a55;
+  --chart-grid: #283741;
+  --chart-axis: #6f7f8b;
+}

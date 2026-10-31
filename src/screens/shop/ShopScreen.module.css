@@ -1,0 +1,77 @@
+.page {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Jump buttons: Power-ups / Vault / Avatars ---------- */
+.jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin-top: var(--s-5);
+}
+.jumpBtn {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 var(--s-4);
+  margin-bottom: var(--edge);
+  background: var(--surface);
+  color: var(--text);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 var(--edge) 0 var(--border);
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.15s;
+}
+.jumpBtn svg {
+  flex: none;
+  color: var(--c);
+}
+.jumpBtn:hover {
+  background: var(--surface-2);
+}
+.jumpBtn:active {
+  transform: translateY(var(--edge));
+  box-shadow: 0 0 0 var(--border);
+}
+
+/* ---------- Sections ---------- */
+.section {
+  margin-top: var(--s-6);
+  padding-top: var(--s-6);
+  border-top: 2px solid var(--border);
+  scroll-margin-top: calc(var(--s-4) + var(--safe-top));
+}
+.secHead {
+  margin-bottom: var(--s-4);
+}
+.secTitle {
+  font-size: 22px;
+  font-weight: 700;
+}
+.secSub {
+  margin-top: 2px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.footer {
+  margin-top: var(--s-8);
+  padding-right: var(--s-6);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text-faint);
+}
+
+@media (max-width: 380px) {
+  .jumpBtn {
+    padding: 0 var(--s-3);
+    font-size: 14px;
+  }
+}

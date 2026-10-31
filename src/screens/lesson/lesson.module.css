@@ -1,0 +1,430 @@
+/*
+  The lesson player shell: top bar, exercise stage, and the Check / feedback
+  footer. Colors come only from tokens. The Player sets the unit color as
+  --a / --a-dark / --a-soft plus --a-ink (light) and --a-ink-night (dark).
+*/
+
+.screen {
+  /* Readable text versions of the brand colors. Swapped for dark mode below. */
+  --ink-green: var(--c-green-dark);
+  --ink-red: var(--c-red-dark);
+  --ink-blue: var(--c-blue-dark);
+  --ink-orange: var(--c-orange-dark);
+  --ink-teal: var(--c-teal-dark);
+  --accent: var(--a-ink, var(--c-green-dark));
+
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme='light'])) .screen {
+    --ink-green: var(--c-green);
+    --ink-red: var(--c-red);
+    --ink-blue: var(--c-blue);
+    --ink-orange: var(--c-orange);
+    --ink-teal: var(--c-teal);
+    --accent: var(--a-ink-night, var(--c-green));
+  }
+}
+:global(:root[data-theme='dark']) .screen {
+  --ink-green: var(--c-green);
+  --ink-red: var(--c-red);
+  --ink-blue: var(--c-blue);
+  --ink-orange: var(--c-orange);
+  --ink-teal: var(--c-teal);
+  --accent: var(--a-ink-night, var(--c-green));
+}
+
+/* ---------- Top bar ---------- */
+
+.top {
+  position: relative;
+  flex: none;
+  padding: calc(var(--safe-top) + var(--s-3)) calc(var(--safe-right) + var(--s-4)) var(--s-2) calc(var(--safe-left) + var(--s-4));
+}
+
+.topInner {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  max-width: 760px;
+  margin: 0 auto;
+  min-height: 44px;
+}
+
+.quitBtn {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  margin-left: calc(var(--s-2) * -1);
+}
+
+.track {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  height: 18px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-3);
+  overflow: hidden;
+}
+
+.fill {
+  position: relative;
+  height: 100%;
+  min-width: 0;
+  border-radius: var(--radius-pill);
+  background: var(--c-green);
+}
+
+.fillShine {
+  position: absolute;
+  top: 4px;
+  left: 8px;
+  right: 8px;
+  height: 4px;
+  border-radius: var(--radius-pill);
+  background: var(--text-on-color);
+  opacity: 0.22;
+}
+
+.hearts {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 48px;
+  justify-content: flex-end;
+}
+
+.heartIcon {
+  display: inline-flex;
+  color: var(--c-red);
+}
+
+.heartNum {
+  display: inline-flex;
+  align-items: center;
+  min-width: 14px;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--ink-red);
+  font-variant-numeric: tabular-nums;
+}
+
+.counter {
+  flex: none;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.counterOf {
+  color: var(--text-faint);
+}
+
+.practiceTag {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ink-teal);
+  font-size: 15px;
+  font-weight: 500;
+}
+@media (max-width: 380px) {
+  .practiceTag span {
+    display: none;
+  }
+}
+
+.comboSlot {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.combo {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--s-2);
+  margin-top: var(--s-1);
+  padding: 6px var(--s-4);
+  border-radius: var(--radius-pill);
+  background: var(--c-orange-soft);
+  box-shadow: var(--shadow-float);
+}
+.comboMain {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink-orange);
+  white-space: nowrap;
+}
+.comboTail {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ---------- Stage ---------- */
+
+.main {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: var(--s-4) calc(var(--safe-right) + var(--s-4)) var(--s-6) calc(var(--safe-left) + var(--s-4));
+}
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+  min-height: 100%;
+  margin: 0 auto;
+}
+
+.card {
+  width: 100%;
+}
+
+/* "Rematch" above a question you missed earlier, like Duolingo's "Previous mistake". */
+.retryTag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: var(--s-3);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink-orange);
+}
+
+/* ---------- Footer / feedback ---------- */
+
+.footer {
+  flex: none;
+  position: relative;
+  border-top: 2px solid var(--border);
+  background: var(--bg);
+  padding: var(--s-4) calc(var(--safe-right) + var(--s-4)) calc(var(--safe-bottom) + var(--s-4)) calc(var(--safe-left) + var(--s-4));
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+.toneRight {
+  background: var(--c-green-soft);
+  border-top-color: transparent;
+}
+.toneWrong {
+  background: var(--c-red-soft);
+  border-top-color: transparent;
+}
+.toneMeh {
+  background: var(--c-orange-soft);
+  border-top-color: transparent;
+}
+
+.footerInner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.actionReady {
+  animation: readyPop 0.32s var(--ease-bounce);
+}
+@keyframes readyPop {
+  0% {
+    transform: scale(0.97);
+  }
+  60% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.fbBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  min-width: 0;
+}
+
+.fbHead {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.fbIcon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--c-green);
+}
+.toneWrong .fbIcon {
+  color: var(--c-red);
+}
+.toneMeh .fbIcon {
+  color: var(--c-orange);
+}
+
+.fbTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--ink-green);
+}
+.toneWrong .fbTitle {
+  color: var(--ink-red);
+}
+.toneMeh .fbTitle {
+  color: var(--ink-orange);
+}
+
+.fbScroll {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  max-height: 34dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--ink-green);
+}
+.toneWrong .fbScroll {
+  color: var(--ink-red);
+}
+.toneMeh .fbScroll {
+  color: var(--ink-orange);
+}
+.fbScroll:empty {
+  display: none;
+}
+
+.fbLabel {
+  display: block;
+  font-weight: 700;
+}
+
+.fbAnswer {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.fbAnswerText {
+  overflow-wrap: anywhere;
+}
+
+.fbDetail,
+.fbWhy,
+.fbExplain {
+  color: var(--text);
+}
+.fbDetail {
+  color: var(--text-muted);
+}
+.fbWhy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.fbWhy .fbLabel {
+  color: var(--ink-green);
+}
+.toneWrong .fbWhy .fbLabel {
+  color: var(--ink-red);
+}
+
+.fbNote {
+  color: var(--text-muted);
+}
+
+/* Wide windows: feedback on the left, button on the right, Duolingo style. */
+@media (min-width: 720px) {
+  .footer {
+    padding-top: var(--s-5);
+    padding-bottom: calc(var(--safe-bottom) + var(--s-5));
+  }
+  .footerInner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--s-6);
+    max-width: 760px;
+  }
+  .fbBody {
+    flex: 1;
+  }
+  .footerInner .actionBtn {
+    flex: none;
+    width: auto;
+    min-width: 180px;
+  }
+  .fbScroll {
+    max-height: 30dvh;
+  }
+}
+
+/* ---------- Quit sheet ---------- */
+
+.quitText {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.45;
+  margin-bottom: var(--s-5);
+}
+
+.quitButtons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+/* ---------- Empty practice ---------- */
+
+.emptyWrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.emptyBody {
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--text-muted);
+}

@@ -1,0 +1,356 @@
+/*
+  Money documents drawn as paper. Every kind gets its own look so a pay stub
+  reads like a pay stub and a receipt like a receipt:
+
+    paystub    header band, ruled two-column rows, net pay in a green box
+    receipt    narrow centered slip, monospace, dashed rules, torn bottom edge
+    statement  thin blue top rule, account line, boxed amount due
+    offer      a letter with a folded corner and dotted leaders
+    table      plain and clean, striped rows
+
+  Colors come only from tokens. In dark mode the paper is one step lighter
+  than the page so it still looks like a sheet lying on the screen.
+  Not tappable, so no pressable bottom edge.
+*/
+
+.doc {
+  --paper: var(--surface);
+  --paper-2: var(--surface-2);
+  --rule: var(--border-strong);
+  --hair: var(--border);
+
+  position: relative;
+  width: 100%;
+  margin: 0;
+  color: var(--text);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.35;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+  text-align: left;
+}
+
+@media (prefers-color-scheme: dark) {
+  :global(:root:not([data-theme='light'])) .doc {
+    --paper: var(--surface-2);
+    --paper-2: var(--surface-3);
+  }
+}
+:global(:root[data-theme='dark']) .doc {
+  --paper: var(--surface-2);
+  --paper-2: var(--surface-3);
+}
+
+/* ---------- Shared parts ---------- */
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-2);
+  padding: var(--s-3) var(--s-3) var(--s-2);
+}
+.icon {
+  flex: none;
+  margin-top: 1px;
+  color: var(--text-muted);
+}
+.headText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+.subtitle {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.rows {
+  margin: 0;
+  padding: 0 var(--s-3) var(--s-2);
+  /* A safety net. Long documents switch to .dense first, so this rarely scrolls. */
+  max-height: 52vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-2);
+  padding: 5px 0;
+}
+.label {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  font-weight: 400;
+}
+.value {
+  flex: none;
+  max-width: 62%;
+  margin: 0;
+  font-weight: 500;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.indent .label {
+  padding-left: var(--s-4);
+  color: var(--text-muted);
+}
+
+.strong {
+  margin-top: 2px;
+  border-top: 1px solid var(--rule);
+}
+.strong .label,
+.strong .value {
+  font-weight: 700;
+}
+
+.note {
+  margin: 0;
+  padding: var(--s-2) var(--s-3) var(--s-3);
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--text-muted);
+}
+
+/* Long documents: smaller type, tighter rows. */
+.dense {
+  font-size: 14px;
+}
+.dense .head {
+  padding-top: var(--s-2);
+  padding-bottom: var(--s-1);
+}
+.dense .row {
+  padding: 3px 0;
+}
+
+/* ---------- Pay stub ---------- */
+
+.paystub .head {
+  margin-bottom: var(--s-1);
+  background: var(--paper-2);
+  border-bottom: 1px solid var(--rule);
+  border-radius: 5px 5px 0 0;
+}
+.paystub .icon {
+  color: var(--ink-green, var(--c-green-dark));
+}
+.paystub .row {
+  border-bottom: 1px solid var(--hair);
+}
+.paystub .row:last-child {
+  border-bottom: 0;
+}
+/* The amount column, ruled off like a printed stub. */
+.paystub .value {
+  min-width: 5.5em;
+  padding-left: var(--s-2);
+  border-left: 1px solid var(--hair);
+}
+.paystub .strong {
+  margin-top: 0;
+  border-top: 0;
+}
+/* Net pay: the number everyone looks for first. */
+.paystub .strong:last-child {
+  margin: var(--s-1) calc(var(--s-2) * -1) 0;
+  padding: var(--s-2);
+  background: var(--c-green-soft);
+  border-radius: 4px;
+  font-size: 16px;
+}
+.paystub .strong:last-child .value {
+  border-left-color: transparent;
+}
+
+/* ---------- Receipt ---------- */
+
+.receipt {
+  max-width: 300px;
+  margin: 0 auto 10px;
+  border: 0;
+  border-radius: 0;
+  font-family: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace;
+  font-size: 14px;
+  /* A thin outline that also follows the torn edge below. */
+  filter: drop-shadow(1px 0 0 var(--rule)) drop-shadow(-1px 0 0 var(--rule)) drop-shadow(0 1px 0 var(--rule))
+    drop-shadow(0 -1px 0 var(--rule));
+}
+/* The torn, zigzag bottom of the slip. */
+.receipt::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 7px;
+  background: conic-gradient(from -45deg at 50% 100%, var(--paper) 90deg, transparent 0) 0 0 / 14px 7px;
+  background-repeat: round no-repeat;
+}
+.receipt .head {
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-1);
+  margin: 0 var(--s-3) var(--s-1);
+  padding: var(--s-4) 0 var(--s-2);
+  border-bottom: 1px dashed var(--rule);
+  text-align: center;
+}
+.receipt .headText {
+  align-items: center;
+}
+.receipt .title {
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.receipt .subtitle {
+  font-size: 12px;
+}
+.receipt .row {
+  padding: 3px 0;
+}
+.receipt .strong {
+  margin-top: var(--s-1);
+  padding-top: var(--s-2);
+  border-top: 1px dashed var(--rule);
+  font-size: 15px;
+}
+.receipt .strong + .strong {
+  margin-top: 0;
+  padding-top: 3px;
+  border-top: 0;
+}
+.receipt .note {
+  margin: 0 var(--s-3);
+  padding: var(--s-2) 0 var(--s-4);
+  border-top: 1px dashed var(--rule);
+  text-align: center;
+}
+
+/* ---------- Bank or card statement ---------- */
+
+.statement {
+  border-top: 4px solid var(--c-blue);
+  border-radius: 3px 3px 6px 6px;
+}
+.statement .icon {
+  color: var(--ink-blue, var(--c-blue-dark));
+}
+.statement .head {
+  margin: 0 var(--s-3) var(--s-1);
+  padding: var(--s-3) 0 var(--s-2);
+  border-bottom: 1px solid var(--rule);
+}
+/* The account line ("Account ending 4417 · Sep 1 to Sep 30"). */
+.statement .subtitle {
+  letter-spacing: 0.02em;
+}
+.statement .row {
+  border-bottom: 1px dotted var(--rule);
+}
+.statement .row:last-child {
+  border-bottom: 0;
+}
+.statement .strong {
+  margin-top: 0;
+  border-top: 0;
+}
+/* The amount due, boxed the way real statements do it. */
+.statement .strong:last-child {
+  margin: var(--s-1) calc(var(--s-2) * -1) 0;
+  padding: var(--s-2);
+  background: var(--paper-2);
+  border-left: 3px solid var(--c-blue);
+  border-radius: 4px;
+}
+
+/* ---------- Loan or job offer ---------- */
+
+.offer {
+  border-radius: 4px;
+}
+/* A folded top corner, so it reads as a letter. */
+.offer::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(225deg, var(--bg) 50%, var(--paper-2) 50%);
+  border-bottom: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+  border-bottom-left-radius: 4px;
+}
+.offer .head {
+  margin: 0 var(--s-3) var(--s-1);
+  padding: var(--s-4) var(--s-5) var(--s-2) 0;
+  border-bottom: 3px double var(--rule);
+}
+.offer .title {
+  font-size: 17px;
+}
+/* Dotted leaders between each term and its value. */
+.offer .label {
+  flex: 0 1 auto;
+}
+.offer .row::after {
+  content: '';
+  order: 1;
+  flex: 1 1 var(--s-4);
+  min-width: var(--s-4);
+  border-bottom: 2px dotted var(--rule);
+}
+.offer .value {
+  order: 2;
+}
+.offer .strong {
+  margin-top: 0;
+  border-top: 0;
+}
+.offer .note {
+  padding-top: var(--s-1);
+  font-style: italic;
+}
+
+/* ---------- Plain table ---------- */
+
+.table .icon {
+  display: none;
+}
+.table .head {
+  border-bottom: 2px solid var(--rule);
+}
+.table .rows {
+  padding: 0 0 var(--s-1);
+}
+.table .row {
+  padding: 6px var(--s-3);
+}
+.table .row:nth-child(even) {
+  background: var(--paper-2);
+}
+.table.dense .row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+.table .strong {
+  margin-top: 0;
+}

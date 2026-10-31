@@ -1,0 +1,430 @@
+/*
+  The lesson path. Unit colors arrive as --c (main), --cd (3D edge), --cs (soft tint).
+  Each row gets --off (-1..1, how far it leans left/right) and --size (node size).
+*/
+
+.path {
+  position: relative;
+  padding-bottom: var(--s-8);
+}
+
+/* ---------- Unit section ---------- */
+.unit {
+  position: relative;
+}
+.unit + .unit {
+  margin-top: var(--s-6);
+}
+
+.banner {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-3) var(--s-3) var(--s-3) var(--s-4);
+  background: var(--c);
+  color: var(--text-on-color);
+  border-radius: var(--radius-lg);
+}
+.bannerText {
+  flex: 1;
+  min-width: 0;
+}
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  opacity: 0.9;
+}
+.bannerTitle {
+  margin-top: 2px;
+  font-size: 22px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.guideBtn {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 48px;
+  min-height: 48px;
+  padding: 0 var(--s-3);
+  border: 2px solid color-mix(in srgb, var(--text-on-color) 45%, transparent);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--text-on-color);
+  box-shadow: 0 2px 0 var(--cd);
+  margin-bottom: 2px;
+  font-weight: 700;
+  font-size: 14px;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.15s;
+}
+.guideBtn:hover {
+  background: color-mix(in srgb, var(--text-on-color) 14%, transparent);
+}
+.guideBtn:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 var(--cd);
+}
+.guideBtn:focus-visible {
+  outline-color: var(--text-on-color);
+}
+.guideLabel {
+  display: none;
+}
+
+/* ---------- The winding track ---------- */
+.track {
+  --amp: min(26vw, 120px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--s-8) 0 var(--s-4);
+}
+
+.deco {
+  position: absolute;
+  top: 46%;
+  left: calc(50% - var(--dir) * var(--amp) * 1.15);
+  width: 84px;
+  height: 84px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--cs);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.decoEmoji {
+  font-size: 42px;
+  line-height: 1;
+}
+.decoLocked {
+  filter: grayscale(1);
+  opacity: 0.45;
+}
+
+.row {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.row + .row {
+  margin-top: var(--s-4);
+}
+.rowCurrent {
+  padding-top: 38px;
+}
+.rowOpen {
+  z-index: 30;
+}
+
+.slot {
+  transform: translateX(calc(var(--off) * var(--amp)));
+}
+.popIn {
+  will-change: transform;
+}
+.shakeLayer {
+  position: relative;
+  width: var(--size);
+  height: calc(var(--size) + 6px);
+}
+
+/* ---------- The node button ---------- */
+.node {
+  --face: var(--c);
+  --rim: var(--cd);
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: var(--size);
+  height: var(--size);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--face);
+  color: var(--text-on-color);
+  box-shadow: 0 5px 0 var(--rim);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.15s ease;
+}
+.node:hover {
+  filter: brightness(1.06);
+}
+.node:active,
+.nodeOpen {
+  transform: translateY(5px);
+  box-shadow: 0 0 0 var(--rim);
+}
+.node:focus-visible {
+  outline-offset: 5px;
+}
+
+.done {
+  --face: var(--c);
+  --rim: var(--cd);
+}
+.current {
+  --face: var(--c);
+  --rim: var(--cd);
+}
+.open {
+  --face: color-mix(in srgb, var(--c) 58%, var(--surface));
+  --rim: color-mix(in srgb, var(--cd) 62%, var(--surface));
+}
+.locked {
+  --face: var(--surface-3);
+  --rim: var(--border-strong);
+  color: var(--text-faint);
+}
+.locked:hover {
+  filter: none;
+}
+.quiz {
+  border-radius: 38%;
+}
+.quizDone {
+  --face: var(--c-yellow);
+  --rim: var(--c-yellow-dark);
+}
+.miniLock {
+  position: absolute;
+  right: -4px;
+  bottom: -2px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--border-strong);
+  color: var(--text-faint);
+}
+
+/* ---------- "You are here" extras ---------- */
+.halo {
+  position: absolute;
+  left: -10px;
+  top: -10px;
+  width: calc(var(--size) + 20px);
+  height: calc(var(--size) + 20px);
+  border-radius: 50%;
+  border: 5px solid color-mix(in srgb, var(--c) 24%, transparent);
+  pointer-events: none;
+}
+/* the quiz node is a squircle, so its ring follows that shape */
+.shakeLayer:has(.quiz) .halo {
+  border-radius: 40%;
+}
+
+.bubble {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: calc(100% + 12px);
+  transform: translateX(-50%);
+  pointer-events: none;
+  animation: bob 1.6s ease-in-out infinite;
+}
+@keyframes bob {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -5px);
+  }
+}
+.bubbleInner {
+  position: relative;
+  display: block;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  border: 2px solid var(--border);
+  color: var(--c);
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.bubbleInner::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -9px;
+  width: 14px;
+  height: 14px;
+  background: var(--surface);
+  border-right: 2px solid var(--border);
+  border-bottom: 2px solid var(--border);
+  transform: translateX(-50%) rotate(45deg);
+  border-bottom-right-radius: 3px;
+}
+
+/* ---------- Popover ---------- */
+.popWrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 14px);
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+.pop {
+  position: relative;
+  width: min(100%, 340px);
+  padding: var(--s-4);
+  background: var(--c);
+  color: var(--text-on-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-float);
+  pointer-events: auto;
+  transform-origin: 50% 0;
+  outline: none;
+  /* Room the fixed bottom tab bar covers, so scrolling the popover into view keeps its button above the bar. */
+  --pop-clear: calc(var(--tabbar-h) + var(--safe-bottom) + var(--s-4));
+  scroll-margin-top: 80px;
+  scroll-margin-bottom: var(--pop-clear);
+}
+/* An invisible spacer under the popover: the last node on the page still gets enough scroll room. */
+.pop::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 1px;
+  height: var(--pop-clear);
+  pointer-events: none;
+}
+.popArrow {
+  position: absolute;
+  top: -8px;
+  left: clamp(28px, calc(50% + var(--off) * var(--amp)), calc(100% - 28px));
+  width: 18px;
+  height: 18px;
+  background: inherit;
+  border-radius: 4px 0 0 0;
+  transform: translateX(-50%) rotate(45deg);
+}
+.popKicker {
+  position: relative;
+  font-size: 14px;
+  opacity: 0.9;
+}
+.popTitle {
+  position: relative;
+  margin-top: 2px;
+  font-size: 22px;
+  overflow-wrap: anywhere;
+}
+.popDesc {
+  margin-top: 4px;
+  line-height: 1.45;
+}
+.meta {
+  margin-top: var(--s-2);
+  font-size: 14px;
+  opacity: 0.9;
+}
+.popNote {
+  margin-top: var(--s-2);
+  font-size: 14px;
+  font-weight: 700;
+}
+.pop .popBtn {
+  margin-top: var(--s-4);
+  color: var(--c);
+}
+.pop .popBtn:focus-visible {
+  outline-color: var(--text-on-color);
+}
+
+.popLocked {
+  background: var(--surface-2);
+  color: var(--text);
+  border: 2px solid var(--border);
+  box-shadow: var(--shadow-float);
+}
+.popLocked .popArrow {
+  top: -10px;
+  border-left: 2px solid var(--border);
+  border-top: 2px solid var(--border);
+}
+.popLocked .popKicker {
+  color: var(--text-faint);
+  opacity: 1;
+}
+.lockedText {
+  margin: var(--s-1) 0 var(--s-3);
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* ---------- Jump back to your lesson ---------- */
+.jumpDock {
+  position: sticky;
+  z-index: 40;
+  bottom: calc(var(--tabbar-h) + var(--safe-bottom) + var(--s-4));
+  height: 0;
+  pointer-events: none;
+}
+.jumpWrap {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  pointer-events: auto;
+}
+.jump {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--c);
+  box-shadow: 0 var(--edge) 0 var(--border), var(--shadow-float);
+  margin-bottom: var(--edge);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.15s;
+}
+.jump:hover {
+  background: var(--surface-2);
+}
+.jump:active {
+  transform: translateY(var(--edge));
+  box-shadow: 0 0 0 var(--border);
+}
+
+/* ---------- Bigger screens ---------- */
+@media (min-width: 420px) {
+  .guideLabel {
+    display: inline;
+  }
+}
+
+@media (min-width: 900px) {
+  .pop {
+    --pop-clear: var(--s-4);
+  }
+  .jumpDock {
+    bottom: var(--s-6);
+  }
+  .track {
+    padding-top: var(--s-10);
+  }
+}

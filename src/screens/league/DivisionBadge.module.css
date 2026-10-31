@@ -1,0 +1,89 @@
+.badge {
+  position: relative;
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  background: var(--dc);
+  box-shadow: 0 var(--depth) 0 var(--dcd);
+  margin-bottom: var(--depth);
+  color: var(--text-on-color);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.coin {
+  border-radius: 50%;
+}
+
+.bill {
+  border-radius: 16% / 24%;
+}
+
+/* Inner ring, like the raised rim on a coin or the border printed on a bill */
+.badge::before {
+  content: '';
+  position: absolute;
+  inset: 11%;
+  border-radius: inherit;
+  border: 2px solid color-mix(in srgb, var(--text-on-color) 45%, transparent);
+}
+.bill::before {
+  inset: 12% 7%;
+  border-style: dashed;
+}
+
+.glyph {
+  position: relative;
+}
+
+.shineWrap {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  pointer-events: none;
+}
+.shine .shineWrap::after {
+  content: '';
+  position: absolute;
+  top: -20%;
+  bottom: -20%;
+  left: -70%;
+  width: 45%;
+  background: linear-gradient(100deg, transparent, color-mix(in srgb, var(--text-on-color) 55%, transparent), transparent);
+  transform: skewX(-18deg);
+  animation: sweep 4.2s var(--ease-out) infinite;
+}
+@keyframes sweep {
+  0% {
+    left: -70%;
+  }
+  40%,
+  100% {
+    left: 135%;
+  }
+}
+
+.locked {
+  background: var(--surface-3);
+  box-shadow: 0 var(--depth) 0 var(--border-strong);
+  color: var(--text-faint);
+}
+.locked::before {
+  border-color: var(--border-strong);
+}
+
+.lock {
+  position: absolute;
+  right: -6px;
+  bottom: -6px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--border-strong);
+  color: var(--text-faint);
+}

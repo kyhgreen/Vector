@@ -1,0 +1,345 @@
+/*
+  Results screen and the celebration steps after it. Tokens only.
+  Mostly plain text on the page: one big emoji, one big number, a short list.
+*/
+
+.results {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: calc(var(--safe-top) + var(--s-6)) calc(var(--safe-right) + var(--s-4)) var(--s-6) calc(var(--safe-left) + var(--s-4));
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.summary,
+.extra {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-3);
+  text-align: center;
+}
+
+.hero {
+  font-size: 84px;
+  line-height: 1;
+  margin-bottom: var(--s-2);
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--ink-green);
+}
+.titleFail {
+  color: var(--ink-orange);
+}
+
+.sub {
+  max-width: 380px;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+/* ---------- XP + stats ---------- */
+
+.xp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: var(--s-5);
+}
+
+.xpNum {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--ink-orange);
+  font-variant-numeric: tabular-nums;
+}
+
+.xpLabel {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* A plain list, label on the left and the number on the right. */
+.stats {
+  width: 100%;
+  max-width: 320px;
+  margin: var(--s-4) 0 0;
+  text-align: left;
+}
+
+.row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: var(--s-3) var(--s-1);
+  border-top: 2px solid var(--border);
+}
+.row:last-child {
+  border-bottom: 2px solid var(--border);
+}
+.row dt {
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+.row dd {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.loot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s-2) var(--s-5);
+  margin-top: var(--s-3);
+}
+
+.lootItem {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.lootHeart {
+  color: var(--c-red);
+}
+
+/* ---------- Misses ---------- */
+
+.misses {
+  width: 100%;
+  margin-top: var(--s-4);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  text-align: left;
+  overflow: hidden;
+}
+
+.missesToggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 52px;
+  padding: var(--s-3) var(--s-4);
+  border: 0;
+  background: transparent;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  text-align: left;
+}
+.missesToggle:hover {
+  background: var(--surface-2);
+}
+/* The box clips overflow, so keep the focus ring inside it. */
+.missesToggle:focus-visible {
+  outline-offset: -4px;
+  border-radius: calc(var(--radius-lg) - 2px);
+}
+
+.missesCount {
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.chev {
+  flex: none;
+  color: var(--text-faint);
+  transition: transform 0.2s var(--ease-out);
+}
+.chevOpen {
+  transform: rotate(180deg);
+}
+
+.missList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+}
+
+.missItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--s-3) var(--s-4);
+  border-top: 2px solid var(--border);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.missA {
+  color: var(--ink-green);
+}
+
+.missLabel {
+  color: var(--text-muted);
+}
+
+.missFoot {
+  padding: var(--s-3) var(--s-4);
+  border-top: 2px solid var(--border);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* ---------- Streak / goal / badges ---------- */
+
+.flameWrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 160px;
+  height: 160px;
+}
+
+.flame {
+  display: inline-flex;
+  color: var(--c-orange);
+}
+
+.flameNum {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 20px;
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--text-on-color);
+  font-variant-numeric: tabular-nums;
+}
+
+.ringWrap {
+  margin-bottom: var(--s-2);
+  animation: ringPop 0.5s var(--ease-bounce);
+}
+@keyframes ringPop {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.ringEmoji {
+  font-size: 52px;
+  line-height: 1;
+}
+
+.badgeList {
+  width: 100%;
+  margin: var(--s-3) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-3) var(--s-1);
+  border-top: 2px solid var(--border);
+  text-align: left;
+}
+.badge:last-child {
+  border-bottom: 2px solid var(--border);
+}
+
+.badgeEmoji {
+  flex: none;
+  width: 48px;
+  font-size: 38px;
+  line-height: 1;
+  text-align: center;
+}
+
+.badgeText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.badgeName {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.badgeDesc {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.badgeCoins {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ---------- Footer ---------- */
+
+.footer {
+  flex: none;
+  border-top: 2px solid var(--border);
+  background: var(--bg);
+  padding: var(--s-4) calc(var(--safe-right) + var(--s-4)) calc(var(--safe-bottom) + var(--s-4)) calc(var(--safe-left) + var(--s-4));
+}
+
+.footerInner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  max-width: 440px;
+  margin: 0 auto;
+}

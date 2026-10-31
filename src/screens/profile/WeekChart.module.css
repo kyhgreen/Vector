@@ -1,0 +1,269 @@
+.wrap {
+  min-width: 0;
+}
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-3);
+}
+.titles {
+  min-width: 0;
+}
+.title {
+  font-size: 19px;
+}
+.summary {
+  margin-top: 2px;
+  font-size: 15px;
+  color: var(--text-muted);
+}
+.total {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 2px;
+  font-weight: 700;
+  font-size: 19px;
+}
+.totalUnit {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* ---------- Plot ---------- */
+.body {
+  display: flex;
+  gap: 6px;
+  margin-top: var(--s-5);
+}
+.yAxis {
+  position: relative;
+  flex: none;
+  width: 26px;
+  height: 150px;
+}
+.tick {
+  position: absolute;
+  right: 0;
+  transform: translateY(50%);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--chart-axis);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.plotCol {
+  flex: 1;
+  min-width: 0;
+}
+.plot {
+  position: relative;
+  height: 150px;
+}
+.grid {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0;
+  border-top: 1px solid var(--chart-grid);
+  pointer-events: none;
+}
+.baseline {
+  border-top: 2px solid var(--border-strong);
+  margin-bottom: -1px;
+}
+.goalLine {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0;
+  border-top: 2px dashed var(--c-orange);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.cols {
+  position: absolute;
+  inset: 0;
+  display: flex;
+}
+.col {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  cursor: default;
+}
+.col:focus-visible {
+  outline: 3px solid var(--c-blue);
+  outline-offset: 0;
+}
+.colActive {
+  background: color-mix(in srgb, var(--surface-2) 70%, transparent);
+}
+
+.bar {
+  display: block;
+  width: min(24px, 62%);
+  border-radius: 4px 4px 0 0;
+  background: color-mix(in srgb, var(--chart-1) 36%, var(--surface));
+  transition: background 0.15s ease;
+}
+.colActive .bar {
+  background: color-mix(in srgb, var(--chart-1) 62%, var(--surface));
+}
+.barToday,
+.colActive .barToday {
+  background: var(--chart-1);
+}
+.barEmpty {
+  min-height: 4px;
+  background: var(--surface-3);
+}
+.colActive .barEmpty {
+  background: var(--border-strong);
+}
+
+.valueLabel {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.tip {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 6px 10px;
+  min-width: 76px;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-float);
+  white-space: nowrap;
+  pointer-events: none;
+  animation: pop 0.18s var(--ease-bounce);
+}
+.tipLeft {
+  left: 0;
+  transform: none;
+  align-items: flex-start;
+}
+.tipRight {
+  left: auto;
+  right: 0;
+  transform: none;
+  align-items: flex-end;
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    scale: 0.85;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+.tipDay {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.tipXp {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+.tipGoal {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.xLabels {
+  display: flex;
+  margin-top: 6px;
+}
+.xLabel {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--chart-axis);
+  white-space: nowrap;
+  overflow: visible;
+}
+.xToday {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.emptyOverlay {
+  position: absolute;
+  inset: 0 0 12px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  text-align: center;
+  padding: 0 var(--s-2);
+  pointer-events: none;
+}
+.emptyOverlay > * {
+  pointer-events: auto;
+}
+.emptyText {
+  font-size: 15px;
+  color: var(--text-muted);
+  padding: 2px 10px;
+  background: var(--bg);
+}
+
+.key {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  margin-top: var(--s-3);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.keyLine {
+  width: 22px;
+  height: 0;
+  border-top: 2px dashed var(--c-orange);
+}
+
+@media (min-width: 560px) {
+  .plot,
+  .yAxis {
+    height: 170px;
+  }
+  .xLabel {
+    font-size: 13px;
+  }
+}

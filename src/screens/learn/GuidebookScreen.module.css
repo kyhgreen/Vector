@@ -1,0 +1,265 @@
+/* The unit's color arrives as --c / --cd / --cs on .screen. */
+.screen {
+  --accent: var(--c);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-6);
+}
+
+/* ---------- Top: straight on the page, no card ---------- */
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+.heroTop {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+.heroEmoji {
+  flex: none;
+  font-size: 48px;
+  line-height: 1;
+}
+.heroText {
+  min-width: 0;
+}
+.heroKicker {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.heroTitle {
+  font-size: 24px;
+  overflow-wrap: anywhere;
+  color: color-mix(in srgb, var(--c) 72%, var(--text));
+}
+.heroTagline {
+  color: var(--text-muted);
+}
+.hero .heroIntro {
+  line-height: 1.55;
+}
+.heroProgress {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-top: var(--s-1);
+}
+.heroCount {
+  flex: none;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+/* ---------- Section jumps ---------- */
+.jumps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin-top: calc(-1 * var(--s-3));
+}
+.jump {
+  min-height: 44px;
+  padding: 0 var(--s-4);
+  background: transparent;
+  color: var(--text-muted);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 700;
+  transition: background 0.15s, color 0.15s;
+}
+.jump:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+/* ---------- Sections ---------- */
+.section {
+  scroll-margin-top: var(--s-6);
+  padding-top: var(--s-5);
+  border-top: 2px solid var(--border);
+}
+.sectionTitle {
+  font-size: 20px;
+  margin-bottom: var(--s-3);
+}
+.sectionSub {
+  margin: calc(-1 * var(--s-2)) 0 var(--s-3);
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* ---------- Key ideas ---------- */
+.ideas {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+}
+.idea {
+  display: flex;
+  gap: var(--s-3);
+}
+.ideaNum {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--cs);
+  color: color-mix(in srgb, var(--c) 72%, var(--text));
+  font-weight: 700;
+  font-size: 14px;
+}
+.ideaText {
+  flex: 1;
+  min-width: 0;
+}
+.ideaTitle {
+  font-size: 16px;
+  margin-top: 4px;
+  overflow-wrap: anywhere;
+}
+.idea .ideaBody {
+  margin-top: var(--s-1);
+  color: var(--text);
+  line-height: 1.55;
+}
+
+/* ---------- Fun facts: one soft block ---------- */
+.facts {
+  list-style: none;
+  margin: 0;
+  padding: var(--s-1) var(--s-4);
+  background: var(--c-yellow-soft);
+  border-radius: var(--radius-lg);
+}
+.fact {
+  padding: var(--s-3) 0;
+  line-height: 1.55;
+}
+.fact + .fact {
+  border-top: 2px solid color-mix(in srgb, var(--c-yellow) 30%, transparent);
+}
+
+/* ---------- Words to know ---------- */
+.words {
+  margin: 0;
+}
+.word {
+  padding: var(--s-3) 0;
+}
+.word:first-child {
+  padding-top: 0;
+}
+.word + .word {
+  border-top: 2px solid var(--border);
+}
+.term {
+  font-weight: 700;
+  color: color-mix(in srgb, var(--c) 72%, var(--text));
+}
+.meaning {
+  margin: 2px 0 0;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ---------- Lessons (tappable rows) ---------- */
+.inside {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+.insideRow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  width: 100%;
+  min-height: 60px;
+  padding: var(--s-2) var(--s-3);
+  text-align: left;
+  color: inherit;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 var(--edge) 0 var(--border);
+  margin-bottom: var(--edge);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.15s;
+}
+button.insideRow:hover {
+  background: var(--surface-2);
+}
+button.insideRow:active {
+  transform: translateY(var(--edge));
+  box-shadow: 0 0 0 var(--border);
+}
+.insideCurrent {
+  border-color: var(--c);
+}
+div.insideLocked {
+  background: transparent;
+  color: var(--text-faint);
+  box-shadow: none;
+  border-style: dashed;
+}
+.insideIcon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--c);
+  color: var(--text-on-color);
+}
+.is_open {
+  background: color-mix(in srgb, var(--c) 58%, var(--surface));
+}
+.is_locked {
+  background: var(--surface-3);
+  color: var(--text-faint);
+}
+.insideText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.insideTitle {
+  font-weight: 700;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+.insideKicker {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.insideCurrent .insideKicker {
+  color: color-mix(in srgb, var(--c) 72%, var(--text));
+  font-weight: 700;
+}
+.insideChev {
+  flex: none;
+  color: var(--text-faint);
+}
+
+/* ---------- Next up ---------- */
+.next {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding-top: var(--s-2);
+}
+.nextLine {
+  color: var(--text-muted);
+}

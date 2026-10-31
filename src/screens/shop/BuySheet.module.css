@@ -1,0 +1,68 @@
+.line {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: calc(-1 * var(--s-1)) 0 var(--s-1);
+}
+
+/* Plain receipt: a few rows, a line above the total. */
+.receipt {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  font-variant-numeric: tabular-nums;
+}
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+.row dd {
+  margin: 0;
+}
+.amt {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text);
+  font-weight: 700;
+}
+.total {
+  padding-top: var(--s-2);
+  border-top: 2px solid var(--border);
+  color: var(--text);
+}
+.shortRow .amt {
+  color: var(--c-red-dark);
+}
+
+.cost {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+.cost strong {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.shortNote {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* Avatar drawing above the line (in place of the sheet's emoji). */
+.art {
+  display: flex;
+  justify-content: center;
+}

@@ -1,0 +1,323 @@
+.page {
+  display: flex;
+  flex-direction: column;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: var(--s-6);
+}
+
+/* ---------- Sections: straight on the page, split by a plain line ---------- */
+.section {
+  min-width: 0;
+  padding: var(--s-6) 0;
+}
+.section + .section {
+  border-top: 2px solid var(--border);
+}
+.section:first-child {
+  padding-top: var(--s-2);
+}
+.sectionTitle {
+  font-size: 19px;
+  margin-bottom: var(--s-4);
+}
+
+.text {
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.text + .text {
+  margin-top: var(--s-2);
+}
+.small {
+  font-size: 14px;
+  color: var(--text-faint);
+}
+
+/* ---------- Labels and groups ---------- */
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+}
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  min-width: 0;
+}
+.groupTop {
+  margin-top: var(--s-5);
+}
+.label {
+  font-size: 15px;
+  color: var(--text-muted);
+}
+.labelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+}
+.counter {
+  font-size: 14px;
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+}
+.counterFull {
+  color: var(--c-orange);
+}
+.hint {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+/* ---------- Avatar row ---------- */
+.avatarRow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-bottom: var(--s-5);
+}
+.avatarRow > :last-child {
+  flex: none;
+}
+.miniAvatar {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--cs);
+  border: 2px solid var(--c);
+}
+.avatarName {
+  flex: 1;
+  min-width: 0;
+  font-weight: 700;
+  font-size: 17px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- Age picker ---------- */
+.ageGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--s-2);
+  padding-bottom: var(--edge);
+}
+.age {
+  min-height: 48px;
+  padding: 0;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 17px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 var(--edge) 0 var(--border);
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.08s ease, transform 0.08s ease;
+}
+.age:hover {
+  background: var(--surface-2);
+}
+.age:active {
+  transform: translateY(var(--edge));
+  box-shadow: 0 0 0 var(--border);
+}
+.ageOn,
+.ageOn:hover {
+  background: var(--c);
+  border-color: var(--cd);
+  color: var(--text-on-color);
+  box-shadow: 0 var(--edge) 0 var(--cd);
+}
+
+/* ---------- Daily goal ---------- */
+.goalGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-2);
+  padding-bottom: var(--edge);
+}
+.goal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-height: 60px;
+  padding: var(--s-2) var(--s-3);
+  text-align: left;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 var(--edge) 0 var(--border);
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.08s ease, transform 0.08s ease;
+}
+.goal:hover {
+  background: var(--surface-2);
+}
+.goal:active {
+  transform: translateY(var(--edge));
+  box-shadow: 0 0 0 var(--border);
+}
+.goalOn,
+.goalOn:hover {
+  background: var(--c-orange-soft);
+  border-color: var(--c-orange);
+  box-shadow: 0 var(--edge) 0 var(--c-orange-dark);
+}
+.goalOn:active {
+  box-shadow: 0 0 0 var(--c-orange-dark);
+}
+.goalName {
+  font-size: 17px;
+  font-weight: 700;
+}
+.goalXp {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.goalCheck {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--c-orange);
+  color: var(--text-on-color);
+}
+
+/* ---------- Toggle rows ---------- */
+.rows > * + * {
+  border-top: 2px solid var(--border);
+}
+.rowsTop {
+  margin-top: var(--s-4);
+}
+
+/* ---------- Install ---------- */
+.installBtn {
+  margin-top: var(--s-4);
+}
+.steps {
+  list-style: none;
+  margin: var(--s-4) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-3);
+}
+.stepIcon {
+  flex: none;
+  display: inline-flex;
+  padding-top: 2px;
+  color: var(--c-teal);
+}
+.stepText {
+  min-width: 0;
+}
+.stepName {
+  font-weight: 700;
+}
+.mine {
+  font-weight: 500;
+  color: var(--text-faint);
+}
+.stepHow {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+.stepHow b {
+  color: var(--text);
+  font-weight: 700;
+}
+.more {
+  margin-top: var(--s-3);
+}
+.moreSummary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 15px;
+  color: var(--c-blue);
+  cursor: pointer;
+  list-style-position: inside;
+}
+.moreSummary:hover {
+  text-decoration: underline;
+}
+.more .steps {
+  margin-top: var(--s-1);
+}
+
+.installed {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  color: var(--text-muted);
+}
+.installed svg {
+  flex: none;
+  color: var(--c-green);
+}
+
+/* ---------- Reset ---------- */
+.danger .sectionTitle {
+  color: var(--c-red);
+}
+.dangerBtn {
+  margin-top: var(--s-4);
+}
+
+/* ---------- Reset sheet ---------- */
+.sheet {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  text-align: center;
+}
+.sheetText {
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.sheetBtns {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  margin-top: var(--s-2);
+}
+
+/* ---------- Wider screens ---------- */
+@media (min-width: 480px) {
+  .ageGrid {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+}
+@media (min-width: 560px) {
+  .goalGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

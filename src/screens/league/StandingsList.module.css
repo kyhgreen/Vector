@@ -1,0 +1,174 @@
+.list {
+  list-style: none;
+  margin: 0 calc(var(--s-2) * -1);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.item {
+  position: relative;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-height: 60px;
+  padding: var(--s-2);
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  background: transparent;
+  text-align: left;
+  transition: background 0.15s, transform 0.08s ease, box-shadow 0.08s ease;
+}
+.row:hover {
+  background: var(--surface-2);
+}
+.row:active {
+  transform: scale(0.99);
+}
+
+/* Your row is the one card on the board, so it gets the press edge */
+.you {
+  background: var(--c-green-soft);
+  border-color: var(--c-green);
+  box-shadow: 0 var(--edge) 0 var(--c-green);
+  margin: 4px 0 calc(var(--edge) + 4px);
+}
+.you:hover {
+  background: var(--c-green-soft);
+}
+.you:active {
+  transform: translateY(var(--edge));
+  box-shadow: 0 0 0 var(--c-green);
+}
+
+/* ---------- Rank + medal ---------- */
+.rank {
+  flex: none;
+  width: 30px;
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+}
+.medal {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--m);
+  color: var(--text-on-color);
+}
+
+/* ---------- Avatar + name ---------- */
+.avatar {
+  flex: none;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+}
+/* The drawing or initials fill the circle, whatever size it is. */
+.initials {
+  font-size: 16px;
+}
+
+.who {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.name {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  min-width: 0;
+  font-size: 16px;
+}
+.nameText {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.youTag {
+  flex: none;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.status {
+  font-size: 14px;
+  color: var(--text-faint);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.you .status {
+  color: var(--text-muted);
+}
+
+.xp {
+  flex: none;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.you .xp {
+  color: var(--text);
+}
+
+/* ---------- Zone lines ---------- */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: var(--s-3) var(--s-2) var(--s-2);
+  color: var(--z);
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  margin-left: var(--s-2);
+  background: currentColor;
+  opacity: 0.45;
+}
+.dividerUp {
+  --z: var(--c-green-dark);
+}
+.dividerDown {
+  --z: var(--c-red-dark);
+}
+
+@media (max-width: 400px) {
+  .row {
+    gap: 10px;
+  }
+  .rank {
+    width: 26px;
+  }
+  .avatar {
+    width: 38px;
+    height: 38px;
+  }
+  .initials {
+    font-size: 15px;
+  }
+  .xp {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,89 @@
+.hero {
+  margin-top: var(--s-2);
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-3);
+}
+.coin {
+  flex: none;
+  display: inline-flex;
+}
+.number {
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+.unit {
+  margin-left: calc(-1 * var(--s-1));
+  align-self: flex-end;
+  padding-bottom: 4px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+.deltaUp,
+.deltaDown {
+  align-self: flex-start;
+  font-size: 15px;
+  font-weight: 700;
+}
+.deltaUp {
+  color: var(--c-green-dark);
+}
+.deltaDown {
+  color: var(--c-red-dark);
+}
+
+.earn {
+  list-style: none;
+  margin: var(--s-3) 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px var(--s-4);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+.earn strong {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.vaultLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: var(--s-1);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: var(--c-green);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+.vaultLink strong {
+  margin: 0 0.25em;
+  font-weight: 700;
+  color: var(--text);
+}
+.vaultLink:hover {
+  color: var(--text);
+}
+
+@media (max-width: 380px) {
+  .number {
+    font-size: 38px;
+  }
+}

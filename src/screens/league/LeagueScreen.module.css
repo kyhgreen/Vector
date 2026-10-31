@@ -1,0 +1,157 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+}
+
+/* ---------- Header ---------- */
+.hero {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-3);
+  padding-top: var(--s-2);
+}
+
+.coinBtn {
+  flex: none;
+  display: grid;
+  place-items: center;
+  min-width: 76px;
+  min-height: 76px;
+  padding: var(--s-1);
+  margin: -4px 0 0 -4px;
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: transparent;
+  perspective: 600px;
+  transition: transform 0.12s ease;
+}
+.coinBtn:active {
+  transform: scale(0.94);
+}
+
+.coinSpin {
+  display: inline-grid;
+  transform-style: preserve-3d;
+}
+
+.heroText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 2px;
+}
+
+.title {
+  font-size: 28px;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+.rules {
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.countdown {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+  font-size: 14px;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.countdown svg {
+  color: var(--dc);
+}
+.countdownUrgent {
+  font-weight: 700;
+  color: var(--c-red-dark);
+}
+.countdownUrgent svg {
+  color: inherit;
+}
+
+.hero .info {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  margin: -6px -6px 0 0;
+  color: var(--text-faint);
+}
+.hero .info:hover {
+  color: var(--text);
+}
+
+/* ---------- Where you stand ---------- */
+.stand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding-top: var(--s-5);
+  border-top: 2px solid var(--border);
+}
+
+.standTitle {
+  font-size: 20px;
+}
+.tone_promote .standTitle {
+  color: var(--c-green-dark);
+}
+.tone_demote .standTitle {
+  color: var(--c-red-dark);
+}
+
+.standBody {
+  line-height: 1.5;
+  max-width: 40ch;
+}
+
+.goal {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-top: var(--s-1);
+}
+.goalBar {
+  flex: 1;
+}
+.goalNums {
+  flex: none;
+  font-size: 14px;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.standBtn {
+  margin-top: var(--s-2);
+}
+
+/* ---------- Standings ---------- */
+.board {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding-top: var(--s-5);
+  border-top: 2px solid var(--border);
+}
+
+.boardTitle {
+  font-size: 20px;
+}
+
+.report {
+  margin-bottom: var(--s-2);
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.footnote {
+  margin-top: var(--s-3);
+  font-size: 14px;
+  color: var(--text-faint);
+}

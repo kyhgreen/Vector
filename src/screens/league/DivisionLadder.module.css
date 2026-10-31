@@ -1,0 +1,102 @@
+.scroller {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  /* Soft fade on both edges hints that the row scrolls */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, var(--bg) 18px, var(--bg) calc(100% - 18px), transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, var(--bg) 18px, var(--bg) calc(100% - 18px), transparent 100%);
+}
+.scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.track {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-2);
+  width: max-content;
+  margin: 0;
+  padding: var(--s-1) var(--s-5) 0;
+  list-style: none;
+}
+
+.item {
+  position: relative;
+  scroll-snap-align: center;
+}
+
+/* The rope between rungs: each item draws half a rope on each side, and the
+   halves meet in the gap. Green up to your league, gray after. */
+.item::before,
+.item::after {
+  content: '';
+  position: absolute;
+  top: 33px;
+  height: 3px;
+  background: var(--border);
+}
+.item::before {
+  left: calc(var(--s-2) / -2);
+  right: 50%;
+}
+.item::after {
+  left: 50%;
+  right: calc(var(--s-2) / -2);
+}
+.item:first-child::before,
+.item:last-child::after {
+  display: none;
+}
+.reached::before,
+.cleared::after {
+  background: var(--c-green);
+}
+
+.btn {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 64px;
+  min-height: 44px;
+  padding: 0 4px var(--s-2);
+  border: 0;
+  border-radius: var(--radius);
+  background: transparent;
+  transition: background 0.15s;
+}
+.btn:hover {
+  background: var(--surface-2);
+}
+.btn:active .slot {
+  transform: translateY(2px) scale(0.96);
+}
+
+.slot {
+  height: 70px;
+  display: grid;
+  place-items: center;
+  transition: transform 0.12s ease;
+}
+
+.currentBadge {
+  outline: 3px solid var(--dcs);
+  outline-offset: 3px;
+}
+
+.name {
+  font-size: 14px;
+  white-space: nowrap;
+  color: var(--text-faint);
+}
+.past .name {
+  color: var(--text-muted);
+}
+.current .name {
+  color: var(--text);
+}
