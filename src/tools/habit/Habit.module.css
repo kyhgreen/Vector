@@ -1,0 +1,282 @@
+/* Three sizes on this screen: 20px headings, 16px body, 14px small print. Plus the big numbers. */
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-8);
+}
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  min-width: 0;
+}
+
+.h2 {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.muted {
+  color: var(--text-muted);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.faint {
+  color: var(--text-faint);
+  font-weight: 400;
+}
+
+/* ---------- Habit chips (tappable, so they keep the press edge) ---------- */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) 10px;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: 0 var(--edge) 0 var(--border);
+  margin-bottom: var(--edge);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text-muted);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.15s, border-color 0.15s, color 0.15s;
+}
+.chip:hover {
+  background: var(--surface-2);
+}
+.chip:active {
+  transform: translateY(var(--edge));
+  box-shadow: 0 0 0 var(--border);
+}
+.chipOn,
+.chipOn:hover {
+  background: var(--c-pink-soft);
+  border-color: var(--c-pink);
+  box-shadow: 0 var(--edge) 0 var(--c-pink-dark);
+  color: var(--text);
+}
+.chipOn:active {
+  box-shadow: 0 0 0 var(--c-pink-dark);
+}
+.chipEmoji {
+  font-size: 18px;
+  line-height: 1;
+}
+.chipPrice {
+  color: var(--text-faint);
+  font-size: 14px;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Inputs, straight on the page ---------- */
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+}
+/* The custom fields fold open. The negative margin cancels the parent gap while closed. */
+.customWrap {
+  overflow: hidden;
+  margin-bottom: calc(var(--s-5) * -1);
+}
+.customGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--s-3);
+  padding: 2px 2px var(--s-5);
+}
+@media (min-width: 480px) {
+  .customGrid {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  }
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.label {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* ---------- Empty ---------- */
+.empty {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  padding: var(--s-4) 0;
+}
+.emptyEmoji {
+  font-size: 40px;
+  line-height: 1.2;
+}
+
+/* ---------- Big numbers ---------- */
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.heroValue {
+  font-size: clamp(40px, 12vw, 52px);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--c-pink-dark);
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+.heroUnit {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+.investValue {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--c-green-dark);
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .heroValue {
+    color: var(--c-pink);
+  }
+  :root:not([data-theme='light']) .investValue {
+    color: var(--c-green);
+  }
+}
+:root[data-theme='dark'] .heroValue {
+  color: var(--c-pink);
+}
+:root[data-theme='dark'] .investValue {
+  color: var(--c-green);
+}
+
+/* ---------- Totals: a plain list, not a grid of tiles ---------- */
+.totals {
+  margin: 0;
+}
+.totalRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: 10px 0;
+  border-bottom: 2px solid var(--border);
+  font-size: 16px;
+}
+.totalRow:last-child {
+  border-bottom: 0;
+}
+.totalRow dt {
+  font-weight: 500;
+  color: var(--text-muted);
+  min-width: 0;
+}
+.totalRow dd {
+  margin: 0;
+  flex: none;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.totalRow .totalBig {
+  font-size: 20px;
+}
+
+/* ---------- Fun equivalents ---------- */
+.things {
+  margin: 0;
+  padding-left: 1.2em;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+.things strong {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Invested instead ---------- */
+.chart {
+  margin-top: var(--s-2);
+  min-width: 0;
+}
+
+/* ---------- Trim it ---------- */
+.stepRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+}
+.stepWord {
+  font-size: 16px;
+  font-weight: 500;
+}
+.stepBtn {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--c-green);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--c-green);
+  box-shadow: 0 var(--edge) 0 var(--c-green-dark);
+  margin-bottom: var(--edge);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, opacity 0.15s;
+}
+.stepBtn:hover:not(:disabled) {
+  background: var(--c-green-soft);
+}
+.stepBtn:active:not(:disabled) {
+  transform: translateY(var(--edge));
+  box-shadow: 0 0 0 var(--c-green-dark);
+}
+.stepBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.stepValue {
+  min-width: 1.4em;
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.trimText {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text);
+}
+.trimText strong {
+  font-weight: 700;
+}
+
+.fine {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-faint);
+}

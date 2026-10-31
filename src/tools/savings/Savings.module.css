@@ -1,0 +1,445 @@
+/* Savings Goals. Every color is a token, so dark mode just works. */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+}
+
+/* ---------- Summary: a big number and one line, straight on the page ---------- */
+.hero {
+  padding: var(--s-2) 2px 0;
+}
+.heroValue {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+.heroSub {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ---------- Empty state ---------- */
+.empty {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+.empty > :first-child {
+  padding-top: var(--s-6);
+  padding-bottom: var(--s-2);
+}
+
+/* ---------- Ideas (empty state + new goal sheet) ---------- */
+.groupLabel {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-top: var(--s-2);
+}
+.ideas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 8px;
+}
+.idea {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 6px 14px 6px 12px;
+  text-align: left;
+  font-size: 16px;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 var(--edge) 0 var(--border);
+  margin-bottom: var(--edge);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.15s, border-color 0.15s;
+}
+.idea:hover {
+  background: var(--surface-2);
+}
+.idea:active {
+  transform: translateY(var(--edge));
+  box-shadow: 0 0 0 var(--border);
+}
+.ideaActive,
+.ideaActive:hover {
+  background: var(--c-orange-soft);
+  border-color: var(--c-orange);
+  box-shadow: 0 var(--edge) 0 var(--c-orange-dark);
+}
+.ideaName {
+  font-weight: 500;
+  color: var(--text);
+}
+.ideaPrice {
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* ---------- Goal list ---------- */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+/* A goal groups its own buttons, so it gets a plain outline (no 3D edge: you can't tap the card itself). */
+.goal {
+  --gc: var(--c-orange);
+  --gcd: var(--c-orange-dark);
+  --gcs: var(--c-orange-soft);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding: 14px var(--s-4) var(--s-4);
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+.goalDone {
+  background: var(--c-green-soft);
+  border-color: color-mix(in srgb, var(--c-green) 45%, transparent);
+}
+
+.goalTop {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+.tileWrap {
+  position: relative;
+  flex: none;
+}
+.tile {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  font-size: 28px;
+  line-height: 1;
+  border-radius: 50%;
+  background: var(--gcs);
+}
+.pop {
+  position: absolute;
+  left: -20px;
+  right: -20px;
+  top: 4px;
+  text-align: center;
+  pointer-events: none;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--c-green);
+  white-space: nowrap;
+  z-index: 2;
+}
+.goalText {
+  flex: 1;
+  min-width: 0;
+}
+.goalName {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+.goalAmounts {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.goalAmounts strong {
+  font-weight: 700;
+  color: var(--text);
+}
+.goalActions {
+  display: flex;
+  flex: none;
+  margin: -8px -8px 0 0;
+  align-self: flex-start;
+}
+
+.progressRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pct {
+  flex: none;
+  min-width: 40px;
+  text-align: right;
+  font-weight: 700;
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+.eta {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.chips {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--s-2);
+}
+.chip {
+  min-height: 44px;
+  padding: 0 4px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: 0 var(--edge) 0 var(--border);
+  margin-bottom: var(--edge);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.15s, border-color 0.15s;
+}
+.chip:hover {
+  background: var(--gcs);
+  border-color: var(--gc);
+  box-shadow: 0 var(--edge) 0 var(--gcd);
+}
+.chip:active {
+  transform: translateY(var(--edge));
+  box-shadow: 0 0 0 var(--gcd);
+}
+.chipCustom {
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.doneText {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.undo {
+  overflow: hidden;
+}
+.undoInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+  padding: 2px 0 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+.undoBtn {
+  flex: none;
+  min-height: 44px;
+  padding: 0 12px;
+  margin-right: -8px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--c-blue);
+  font-size: 14px;
+  font-weight: 700;
+}
+.undoBtn:hover {
+  background: var(--c-blue-soft);
+}
+
+/* ---------- Tip: one plain line, no box ---------- */
+.tip {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text-muted);
+  padding: var(--s-4) 2px 0;
+  border-top: 2px solid var(--border);
+}
+.tip strong {
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ---------- Link to the Growth Calculator (tappable, so it keeps the edge) ---------- */
+.linkCard {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+.linkText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.linkTitle {
+  font-weight: 700;
+  line-height: 1.3;
+}
+.linkSub {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+.linkChev {
+  flex: none;
+  color: var(--text-faint);
+}
+
+/* ---------- Sheets & forms ---------- */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+}
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+.formGroup > .groupLabel {
+  margin-top: 0;
+}
+.twoCol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-3);
+}
+
+.emojiGrid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 6px;
+}
+.emojiBtn {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  min-height: 44px;
+  padding: 0;
+  font-size: 24px;
+  line-height: 1;
+  background: var(--surface-2);
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  transition: background 0.15s, border-color 0.15s;
+}
+.emojiBtn:hover {
+  background: var(--surface-3);
+}
+.emojiOn,
+.emojiOn:hover {
+  background: var(--c-orange-soft);
+  border-color: var(--c-orange);
+}
+
+.weeklyChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+.miniChip {
+  min-height: 44px;
+  padding: 0 14px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.miniChip:hover {
+  background: var(--surface-2);
+}
+.miniChipOn,
+.miniChipOn:hover {
+  background: var(--c-orange-soft);
+  border-color: var(--c-orange);
+  color: var(--text);
+  font-weight: 700;
+}
+
+.preview {
+  padding: var(--s-3) var(--s-4);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+}
+.previewOk {
+  background: var(--c-orange-soft);
+}
+.previewText {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+.previewTip {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.problem {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+.problemBad {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--c-red-soft);
+  border-radius: var(--radius-sm);
+  padding: var(--s-2) var(--s-3);
+}
+
+.sheetText {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+.sheetText strong {
+  color: var(--text);
+  font-weight: 700;
+}
+.sheetHint {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  min-height: 2.9em;
+}
+
+.partyEmoji {
+  align-self: center;
+  margin-top: var(--s-2);
+  font-size: 64px;
+  line-height: 1;
+}
+.partyAmount {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}

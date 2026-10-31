@@ -1,0 +1,781 @@
+/*
+  Budget Builder styles. Tokens only, so dark mode just works.
+  Most things sit right on the page. Only chips and buttons get the 3D edge.
+
+  Tone classes set four variables for a brand color:
+    --t   main color     --td  3D edge
+    --ts  pale tint      --ti  readable ink (dark in light mode, light in dark mode)
+*/
+
+.toneGreen {
+  --t: var(--c-green);
+  --td: var(--c-green-dark);
+  --ts: var(--c-green-soft);
+}
+.toneBlue {
+  --t: var(--c-blue);
+  --td: var(--c-blue-dark);
+  --ts: var(--c-blue-soft);
+}
+.toneOrange {
+  --t: var(--c-orange);
+  --td: var(--c-orange-dark);
+  --ts: var(--c-orange-soft);
+}
+.toneRed {
+  --t: var(--c-red);
+  --td: var(--c-red-dark);
+  --ts: var(--c-red-soft);
+}
+.toneYellow {
+  --t: var(--c-yellow);
+  --td: var(--c-yellow-dark);
+  --ts: var(--c-yellow-soft);
+}
+.toneTeal {
+  --t: var(--c-teal);
+  --td: var(--c-teal-dark);
+  --ts: var(--c-teal-soft);
+}
+.tonePurple {
+  --t: var(--c-purple);
+  --td: var(--c-purple-dark);
+  --ts: var(--c-purple-soft);
+}
+.toneGray {
+  --t: var(--c-gray);
+  --td: var(--c-gray-dark);
+  --ts: var(--c-gray-soft);
+}
+.toneGreen,
+.toneBlue,
+.toneOrange,
+.toneRed,
+.toneYellow,
+.toneTeal,
+.tonePurple,
+.toneGray {
+  --ti: color-mix(in srgb, var(--td) 60%, var(--text));
+}
+
+/* ---------- Layout and type ---------- */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+  /* Room for focus rings while still clipping the sideways tab slide. */
+  margin: 0 calc(-1 * var(--s-2));
+  padding: 0 var(--s-2);
+  overflow-x: clip;
+}
+
+.tabLabel {
+  white-space: nowrap;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding-top: var(--s-5);
+  border-top: 2px solid var(--border);
+}
+
+.rule {
+  margin: var(--s-1) 0 0;
+  border: 0;
+  border-top: 2px solid var(--border);
+}
+
+.h2 {
+  font-size: 20px;
+  font-weight: 700;
+}
+.h3 {
+  font-size: 18px;
+  font-weight: 700;
+}
+.muted {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+.faint {
+  color: var(--text-faint);
+}
+.tip {
+  padding: 0 var(--s-1);
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.nudge {
+  color: color-mix(in srgb, var(--c-red-dark) 75%, var(--text));
+  font-size: 14px;
+}
+.sheetText {
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: var(--s-2);
+}
+
+/* ---------- Chips (tappable, so they keep the press edge) ---------- */
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 14px;
+  max-width: 100%;
+  background: var(--surface);
+  color: var(--text);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 var(--edge) 0 var(--border);
+  margin-bottom: var(--edge);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.1;
+  text-align: left;
+  transition:
+    transform 0.08s ease,
+    box-shadow 0.08s ease,
+    background 0.15s,
+    border-color 0.15s;
+}
+.chip > span:last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.chip:hover {
+  border-color: var(--t);
+}
+.chip:active {
+  transform: translateY(var(--edge));
+  box-shadow: 0 0 0 var(--border);
+}
+.chipIcon {
+  display: inline-flex;
+  flex: none;
+  color: var(--t);
+}
+.chipOn {
+  background: var(--ts);
+  border-color: var(--t);
+  color: var(--ti);
+  box-shadow: 0 var(--edge) 0 var(--t);
+}
+.chipOn:active {
+  box-shadow: 0 0 0 var(--t);
+}
+
+/* ---------- Shake (wrong input) ---------- */
+
+@keyframes shakeA {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-7px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-3px);
+  }
+}
+@keyframes shakeB {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-7px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-3px);
+  }
+}
+.shakeA {
+  animation: shakeA 0.36s var(--ease-out);
+}
+.shakeB {
+  animation: shakeB 0.36s var(--ease-out);
+}
+
+/* ---------- Big money input (Quick Split + Tracker) ---------- */
+
+.calc {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+}
+.bigInput > div {
+  min-height: 64px;
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.bigInput input {
+  height: 60px;
+  font-size: 32px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.bigInput span {
+  font-size: 28px;
+  font-weight: 500;
+}
+.fieldLabel {
+  display: block;
+  margin-bottom: var(--s-2);
+}
+
+/* ---------- Quick Split ---------- */
+
+.resultHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-1) var(--s-3);
+}
+.staleNote {
+  padding: var(--s-2) var(--s-3);
+  background: var(--c-yellow-soft);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+}
+
+.splitList {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.splitRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-3);
+  padding: var(--s-3) 0 var(--s-4);
+  border-bottom: 2px solid var(--border);
+}
+.splitRow:last-child {
+  border-bottom: 0;
+}
+.splitIcon {
+  flex: none;
+  margin-top: 1px;
+  color: var(--t);
+}
+.splitText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+.splitName {
+  font-size: 18px;
+  font-weight: 700;
+}
+.splitName .faint {
+  font-size: 16px;
+  font-weight: 500;
+}
+.splitEx {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+.splitAmount {
+  flex: none;
+  color: var(--ti);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+.splitGhost {
+  opacity: 0.6;
+}
+.splitGhost .splitAmount {
+  color: var(--text-faint);
+}
+
+.donutRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-3);
+}
+.donutRow > p {
+  align-self: stretch;
+}
+@media (min-width: 560px) {
+  .donutRow {
+    flex-direction: row;
+    gap: var(--s-6);
+  }
+  .donutRow > figure {
+    flex: none;
+  }
+  .donutRow > p {
+    align-self: center;
+  }
+}
+
+/* ---------- My Budget ---------- */
+
+.stickyAnchor {
+  position: sticky;
+  top: calc(var(--safe-top) + var(--s-2));
+  z-index: 30;
+  height: 0;
+  margin-bottom: calc(-1 * var(--s-4));
+}
+.mini {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: var(--s-2) var(--s-4);
+  background: var(--ts);
+  color: var(--ti);
+  border: 2px solid var(--t);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-float);
+  font-size: 14px;
+  pointer-events: none;
+}
+.mini strong {
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-4) var(--s-5) var(--s-4) var(--s-4);
+  background: var(--ts);
+  border-radius: var(--radius-lg);
+  transition: background 0.3s ease;
+}
+.heroTop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 var(--s-2);
+}
+.heroNumber {
+  color: var(--ti);
+  font-size: clamp(42px, 13vw, 56px);
+  font-weight: 700;
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+}
+.heroNumberLong {
+  font-size: clamp(30px, 9vw, 42px);
+}
+.heroLabel {
+  color: var(--ti);
+}
+.heroTitle {
+  margin-bottom: var(--s-1);
+  font-size: 18px;
+  font-weight: 700;
+}
+.heroMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-1) var(--s-5);
+  color: var(--text-muted);
+  font-size: 14px;
+}
+.heroMeta strong {
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.sectionHead {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-3);
+}
+.sectionIcon {
+  flex: none;
+  margin-top: 1px;
+  color: var(--t);
+}
+.sectionTitles {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+.sectionTotal {
+  flex: none;
+  color: var(--ti);
+  font-size: 20px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.lines {
+  display: flex;
+  flex-direction: column;
+}
+/* No lines yet: drop out of the layout so the section gap doesn't double. */
+.lines:empty {
+  display: none;
+}
+.line {
+  overflow: hidden;
+  /* Keeps focus rings visible inside the height animation. */
+  margin: -6px;
+  padding: 6px;
+}
+.lineInner {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding-bottom: var(--s-2);
+}
+.lineName {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.lineInner .lineName {
+  padding: 0 var(--s-3);
+  font-size: 16px;
+}
+.lineAmount {
+  flex: 0 0 116px;
+  min-width: 0;
+}
+.lineAmount > div {
+  padding: 0 var(--s-3);
+}
+.lineAmount input {
+  font-size: 16px;
+}
+@media (min-width: 480px) {
+  .lineAmount {
+    flex-basis: 150px;
+  }
+}
+.removeBtn {
+  flex: none;
+  width: 44px;
+  height: 44px;
+}
+.removeBtn:hover {
+  color: var(--c-red);
+  background: var(--c-red-soft);
+}
+.linkBtn {
+  align-self: flex-start;
+  min-height: 44px;
+  padding: 0 var(--s-1);
+  background: none;
+  border: 0;
+  color: var(--ti);
+  font-size: 14px;
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.linkBtn:hover {
+  text-decoration-thickness: 2px;
+}
+
+.compare {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding-top: var(--s-2);
+}
+.compareHead {
+  font-size: 16px;
+  font-weight: 700;
+}
+.compareRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-1) var(--s-3);
+}
+.compareName {
+  min-width: 68px;
+}
+.compareNums {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.compareNums .faint {
+  font-weight: 500;
+}
+.compareTag {
+  margin-left: auto;
+  color: var(--ti);
+  font-size: 14px;
+}
+
+.saveArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-2);
+  padding-top: var(--s-2);
+  text-align: center;
+}
+.saveStatus {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+.saveStatusOk {
+  color: color-mix(in srgb, var(--c-green-dark) 60%, var(--text));
+}
+
+/* ---------- Tracker ---------- */
+
+.picker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.picker legend {
+  padding: 0;
+  margin-bottom: var(--s-2);
+}
+.pickerGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.pickerLabel {
+  color: var(--ti);
+  font-size: 14px;
+}
+.flash {
+  padding: var(--s-2) var(--s-3);
+  background: var(--ts);
+  border-radius: var(--radius-sm);
+}
+
+.monthNav {
+  display: flex;
+  align-items: center;
+  gap: var(--s-1);
+}
+.monthNav h2 {
+  flex: 1;
+  min-width: 0;
+}
+.navBtn {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  color: var(--text-muted);
+}
+.navBtn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.summaryTop {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.bigNumber {
+  color: var(--ti);
+  font-size: clamp(36px, 11vw, 44px);
+  font-weight: 700;
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+}
+.bigNumberLong {
+  font-size: clamp(28px, 8vw, 36px);
+}
+
+.catGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+.catGroup + .catGroup {
+  margin-top: var(--s-2);
+}
+.catGroupHead {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+.catGroupName {
+  flex: 1;
+  min-width: 0;
+  font-size: 16px;
+}
+.catGroupNums {
+  color: var(--text-muted);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+.catGroupNums strong {
+  color: var(--text);
+}
+.catRow {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-left: var(--s-1);
+}
+.catTop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-2);
+}
+.catName {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.catNums {
+  flex: none;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.catNums strong {
+  color: var(--text);
+}
+.catNote {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+.catNoteOver {
+  color: color-mix(in srgb, var(--c-red-dark) 70%, var(--text));
+}
+.catNoteGood {
+  color: color-mix(in srgb, var(--c-green-dark) 60%, var(--text));
+}
+
+.dayGroup {
+  display: flex;
+  flex-direction: column;
+}
+.dayHead {
+  padding: var(--s-2) 0 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 500;
+}
+.expList {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.expRow {
+  overflow: hidden;
+  /* Room for the delete button's focus ring inside the height animation. */
+  margin: 0 -6px;
+  padding: 0 6px;
+}
+.expInner {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-1) 0;
+  border-bottom: 2px solid var(--border);
+}
+.expList > li:last-child .expInner {
+  border-bottom: 0;
+}
+.dot {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--t);
+}
+.expText {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+.expName,
+.expNote {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.expNote {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+.expAmount {
+  flex: none;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.trashBtn {
+  flex: none;
+  width: 44px;
+  height: 44px;
+}
+.trashBtn:hover {
+  color: var(--c-red);
+  background: var(--c-red-soft);
+}
+.listFoot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--s-3);
+  padding-top: var(--s-2);
+  border-top: 2px solid var(--border);
+}
+.listFoot strong {
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+}
+
+.emptyBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s-2);
+}
+.emptyBlock > button {
+  margin-top: var(--s-2);
+}

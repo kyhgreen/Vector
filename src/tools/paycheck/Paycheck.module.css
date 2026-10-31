@@ -1,0 +1,196 @@
+/* Three sizes on this screen: 20px headings, 16px body, 14px small print. Plus one big number. */
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-8);
+}
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  min-width: 0;
+}
+
+.h2 {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.muted {
+  color: var(--text-muted);
+  font-size: 16px;
+  font-weight: 500;
+}
+.faint {
+  color: var(--text-faint);
+  font-weight: 400;
+}
+.sectionHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2px var(--s-3);
+}
+.tapHint {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-faint);
+}
+
+/* ---------- Job chips (tappable, so they keep the press edge) ---------- */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) 10px;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: 0 var(--edge) 0 var(--border);
+  margin-bottom: var(--edge);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text-muted);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.15s, border-color 0.15s, color 0.15s;
+}
+.chip:hover {
+  background: var(--surface-2);
+}
+.chip:active {
+  transform: translateY(var(--edge));
+  box-shadow: 0 0 0 var(--border);
+}
+.chipOn,
+.chipOn:hover {
+  background: var(--c-green-soft);
+  border-color: var(--c-green);
+  box-shadow: 0 var(--edge) 0 var(--c-green-dark);
+  color: var(--text);
+}
+.chipOn:active {
+  box-shadow: 0 0 0 var(--c-green-dark);
+}
+.chipEmoji {
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* ---------- Inputs, straight on the page ---------- */
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.label {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+.hint {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+/* ---------- Empty ---------- */
+.empty {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  padding: var(--s-4) 0;
+}
+
+/* ---------- Big number ---------- */
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.heroValue {
+  font-size: clamp(40px, 12vw, 52px);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--c-green-dark);
+  font-variant-numeric: tabular-nums;
+}
+.heroSub {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 34ch;
+  margin-top: var(--s-1);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .heroValue {
+    color: var(--c-green);
+  }
+}
+:root[data-theme='dark'] .heroValue {
+  color: var(--c-green);
+}
+
+/* ---------- Donut ---------- */
+.donut {
+  display: flex;
+  justify-content: center;
+}
+.donut figure {
+  align-items: center;
+}
+
+/* ---------- Hours ---------- */
+.hourList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.hourRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: 10px 0;
+  border-bottom: 2px solid var(--border);
+  font-size: 16px;
+  font-weight: 500;
+}
+.hourRow:last-child {
+  border-bottom: 0;
+}
+.hourValue {
+  flex: none;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.priceAnswer {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-muted);
+  min-height: 1.5em;
+}
+.priceAnswer strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.fine {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-faint);
+}

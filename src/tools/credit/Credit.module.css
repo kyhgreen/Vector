@@ -1,0 +1,485 @@
+.page {
+  /* Readable "good" and "bad" text colors in both themes. */
+  --good: color-mix(in srgb, var(--c-green) 55%, var(--text));
+  --bad: color-mix(in srgb, var(--c-red) 60%, var(--text));
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-8);
+  padding-bottom: var(--s-6);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+.sectionHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+}
+.h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.hint {
+  color: var(--text-faint);
+  font-size: 14px;
+}
+.muted {
+  color: var(--text-muted);
+  margin: 0;
+}
+.num {
+  font-variant-numeric: tabular-nums;
+}
+.footnote {
+  margin: calc(var(--s-4) * -1) 0 0;
+  color: var(--text-faint);
+  font-size: 14px;
+  line-height: 1.45;
+}
+.up {
+  color: var(--good);
+}
+.down {
+  color: var(--bad);
+}
+.flat {
+  color: var(--text-muted);
+}
+
+/* ---------- Score dial (sits right on the page) ---------- */
+.score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: var(--s-2);
+}
+.age {
+  align-self: flex-start;
+  color: var(--text-faint);
+  font-size: 14px;
+}
+.gaugeWrap {
+  width: 100%;
+  max-width: 320px;
+}
+.gauge {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.gaugeTrack {
+  fill: none;
+  stroke: var(--surface-3);
+  stroke-linecap: round;
+}
+.gaugeBand {
+  transition: opacity 0.4s var(--ease-out);
+}
+.gaugeTick {
+  fill: var(--text-faint);
+  font-size: 10px;
+  font-weight: 500;
+  font-family: var(--font);
+}
+.needle {
+  fill: var(--text);
+  stroke: var(--surface);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+.hub {
+  fill: var(--text);
+  stroke: var(--surface);
+  stroke-width: 3;
+}
+.hubDot {
+  fill: var(--surface);
+}
+
+.scoreRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: var(--s-2);
+  margin-top: calc(var(--s-2) * -1);
+  min-height: 60px;
+}
+.scoreNum {
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.delta {
+  font-size: 20px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.band {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  margin: var(--s-1) 0 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+.bandDot {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--band);
+}
+.meaning {
+  margin: 2px 0 0;
+  color: var(--text-muted);
+  max-width: 380px;
+}
+
+/* ---------- What just happened ---------- */
+.empty {
+  margin: calc(var(--s-4) * -1) 0 0;
+  color: var(--text-muted);
+  text-align: center;
+}
+.outcome {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  margin-top: calc(var(--s-4) * -1);
+  padding: var(--s-4);
+  border-radius: var(--radius);
+}
+.outcomeUp {
+  background: var(--c-green-soft);
+}
+.outcomeDown {
+  background: var(--c-red-soft);
+}
+.outcomeFlat {
+  background: var(--surface-2);
+}
+.outcomeHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+}
+.outcomeTitle {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.outcomeDelta {
+  flex: none;
+  font-size: 20px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.outcomeBody {
+  margin: 0;
+}
+.moved {
+  margin: 0;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.moved .up,
+.moved .down {
+  font-weight: 700;
+}
+.outcomeFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+  margin-bottom: calc(var(--s-2) * -1);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Moves (tappable, so they keep the press edge) ---------- */
+.actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-3) var(--s-2);
+}
+@media (max-width: 339px) {
+  .actions {
+    grid-template-columns: 1fr;
+  }
+}
+.action {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 68px;
+  padding: var(--s-2) var(--s-3);
+  text-align: left;
+  color: inherit;
+  font: inherit;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 var(--edge) 0 var(--border);
+  margin-bottom: var(--edge);
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.15s, border-color 0.15s;
+}
+.action:hover {
+  background: var(--surface-2);
+}
+.action:active {
+  transform: translateY(var(--edge));
+  box-shadow: 0 0 0 var(--border);
+}
+.action:focus-visible {
+  outline: 3px solid var(--c-blue);
+  outline-offset: 2px;
+}
+.actionBlocked {
+  background: var(--surface-2);
+  cursor: not-allowed;
+}
+.actionBlocked .actionEmoji {
+  filter: grayscale(1);
+  opacity: 0.5;
+}
+.actionBlocked .actionLabel {
+  color: var(--text-muted);
+}
+.actionEmoji {
+  flex: none;
+  font-size: 24px;
+  line-height: 1;
+}
+.actionText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.actionLabel {
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.25;
+}
+.actionHint {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+.kbd {
+  display: none;
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  color: var(--text-faint);
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+}
+.keysOnly {
+  display: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .kbd {
+    display: block;
+  }
+  .keysOnly {
+    display: inline;
+  }
+  .actionText {
+    padding-right: var(--s-3);
+  }
+}
+
+/* ---------- Factors ---------- */
+.factors {
+  display: flex;
+  flex-direction: column;
+}
+.factor + .factor {
+  border-top: 2px solid var(--border);
+}
+.factorBtn {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  width: 100%;
+  min-height: 64px;
+  padding: var(--s-3) var(--s-1);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.factorBtn:hover .factorName {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+.factorBtn:focus-visible {
+  outline: 3px solid var(--c-blue);
+  outline-offset: -1px;
+}
+.factorMain {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+.factorTop {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+}
+.factorName {
+  font-weight: 700;
+}
+.factorDelta {
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.grade {
+  margin-left: auto;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.chev {
+  flex: none;
+  color: var(--text-faint);
+  transition: transform 0.2s var(--ease-out);
+}
+.chevOpen {
+  transform: rotate(180deg);
+}
+.factorMore {
+  overflow: hidden;
+}
+.factorMoreInner {
+  padding: 0 var(--s-8) var(--s-4) var(--s-1);
+  color: var(--text-muted);
+}
+.factorMoreInner p {
+  margin: 0 0 var(--s-2);
+}
+.factorMoreInner p:last-child {
+  margin-bottom: 0;
+}
+.factorNow {
+  color: var(--text);
+}
+
+/* ---------- Report ---------- */
+.util {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.utilTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--s-2);
+  flex-wrap: wrap;
+}
+.utilTop strong {
+  font-weight: 700;
+}
+.utilMarks {
+  position: relative;
+  height: 18px;
+  font-size: 14px;
+  color: var(--text-faint);
+}
+.utilMarks span {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  line-height: 1.2;
+}
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.listItem {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-3) 0;
+}
+.listItem + .listItem {
+  border-top: 2px solid var(--border);
+}
+.listMain {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.listMain .muted {
+  font-size: 14px;
+}
+.listName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.status {
+  flex: none;
+  font-size: 14px;
+}
+.statusOpen {
+  color: var(--text);
+}
+
+/* ---------- History ---------- */
+.log {
+  max-height: 420px;
+  overflow-y: auto;
+}
+.logDelta {
+  flex: none;
+  min-width: 44px;
+  text-align: right;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Reset sheet ---------- */
+.sheetText {
+  margin: 0 0 var(--s-5);
+  color: var(--text-muted);
+  text-align: center;
+}
+.sheetButtons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+.logNote {
+  margin: 0;
+  color: var(--text-faint);
+  font-size: 14px;
+}
