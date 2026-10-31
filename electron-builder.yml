@@ -1,0 +1,36 @@
+# Packages Vector as a Windows desktop app (npm run build:desktop).
+# Output in release/:
+#   Vector.exe        one file: double-click to run, nothing to install
+#   Vector-Setup.exe  installer: adds a desktop icon and a Start menu entry
+appId: app.vector.money
+productName: Vector
+copyright: Copyright 2026 Vector Team
+electronVersion: 44.9.1
+# Reuse the Electron that npm already installed (avoids re-extracting it, which
+# antivirus scanning can block on Windows).
+electronDist: node_modules/electron/dist
+directories:
+  app: desktop
+  output: release
+  buildResources: desktop/build
+files:
+  - main.cjs
+  - icon.png
+  - app/**
+asar: true
+win:
+  target:
+    - target: portable
+      arch: x64
+    - target: nsis
+      arch: x64
+portable:
+  artifactName: Vector.exe
+nsis:
+  artifactName: Vector-Setup.exe
+  oneClick: true
+  perMachine: false
+  createDesktopShortcut: always
+  createStartMenuShortcut: true
+  shortcutName: Vector
+  runAfterFinish: true
