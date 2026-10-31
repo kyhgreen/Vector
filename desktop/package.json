@@ -1,0 +1,9 @@
+{
+  "name": "vector",
+  "productName": "Vector",
+  "version": "1.0.0",
+  "description": "Learn money skills in bite-sized, game-like lessons.",
+  "author": "Vector Team",
+  "main": "main.cjs",
+  "private": true
+}
